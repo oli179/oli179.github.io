@@ -205,18 +205,18 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h3 id="電腦環境"><a href="#電腦環境" class="headerlink" title="電腦環境"></a>電腦環境</h3><p>虛擬機 windows server 2019<br>Docker version 24.0.2<br>GitLab version 16.1.2</p>
+          <h1 id="電腦環境"><a href="#電腦環境" class="headerlink" title="電腦環境"></a>電腦環境</h1><p>虛擬機 windows server 2019<br>Docker version 24.0.2<br>GitLab version 16.1.2</p>
 <h1 id="問題"><a href="#問題" class="headerlink" title="問題"></a>問題</h1><p>要進行 clone 時，發現 clone 的主機位址是一串英數字，這樣的主機位址電腦是無法解析的，所以要把主機位址更改為 IP。</p>
-<h1 id="解決"><a href="#解決" class="headerlink" title="解決"></a>解決</h1><h2 id="進入容器"><a href="#進入容器" class="headerlink" title="進入容器"></a>進入容器</h2><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">docker</span> <span class="token builtin class-name">exec</span> <span class="token parameter variable">-it</span> loving_mclaren <span class="token function">bash</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h1 id="解決"><a href="#解決" class="headerlink" title="解決"></a>解決</h1><h2 id="進入容器"><a href="#進入容器" class="headerlink" title="進入容器"></a>進入容器</h2><pre class="line-numbers language-none"><code class="language-none">docker exec -it loving_mclaren bash<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<h2 id="用-find-指令尋找-gitlab-rb-檔案"><a href="#用-find-指令尋找-gitlab-rb-檔案" class="headerlink" title="用 find 指令尋找 gitlab.rb 檔案"></a>用 find 指令尋找 gitlab.rb 檔案</h2><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">find</span> /etc/gitlab/gitlab.rb<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h2 id="用-find-指令尋找-gitlab-rb-檔案"><a href="#用-find-指令尋找-gitlab-rb-檔案" class="headerlink" title="用 find 指令尋找 gitlab.rb 檔案"></a>用 find 指令尋找 gitlab.rb 檔案</h2><pre class="line-numbers language-none"><code class="language-none">find &#x2F;etc&#x2F;gitlab&#x2F;gitlab.rb<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <h2 id="用-vi-編輯-gitlab-rb-檔案"><a href="#用-vi-編輯-gitlab-rb-檔案" class="headerlink" title="用 vi 編輯 gitlab.rb 檔案"></a>用 vi 編輯 gitlab.rb 檔案</h2><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">vi</span> /etc/gitlab/gitlab.rb<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>加一行 </p>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">external_url <span class="token string">'http://127.0.0.1'</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <h3 id="〖-不需要加-port-號，不然-GitLab-會無法啟動-〗"><a href="#〖-不需要加-port-號，不然-GitLab-會無法啟動-〗" class="headerlink" title="〖 不需要加 port 號，不然 GitLab 會無法啟動 〗"></a>〖 不需要加 port 號，不然 GitLab 會無法啟動 〗</h3><p><img src="https://hackmd.io/_uploads/Hy39aBRch.jpg"></p>
-<h2 id="重新啟動"><a href="#重新啟動" class="headerlink" title="重新啟動"></a>重新啟動</h2><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">docker</span> restart gitlab<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h2 id="重新啟動"><a href="#重新啟動" class="headerlink" title="重新啟動"></a>重新啟動</h2><pre class="line-numbers language-none"><code class="language-none">docker restart gitlab<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 
       
