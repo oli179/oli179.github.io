@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-16x16-next.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-32x32-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"huang0429.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta property="og:type" content="article">
+<meta property="og:title" content="【VM】windows server 2019 安裝 Docker 並架設 Gitlab">
+<meta property="og:url" content="https://huang0429.github.io/2023/07/28/%E3%80%90VM%E3%80%91windows-server-2019-%E5%AE%89%E8%A3%9D-Docker-%E4%B8%A6%E6%9E%B6%E8%A8%AD-Gitlab/index.html">
+<meta property="og:site_name" content="天下第一不是我">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://huang0429.github.io/2023/07/28/%E3%80%90VM%E3%80%91windows-server-2019-%E5%AE%89%E8%A3%9D-Docker-%E4%B8%A6%E6%9E%B6%E8%A8%AD-Gitlab/1.jpg">
+<meta property="og:image" content="https://huang0429.github.io/2023/07/28/%E3%80%90VM%E3%80%91windows-server-2019-%E5%AE%89%E8%A3%9D-Docker-%E4%B8%A6%E6%9E%B6%E8%A8%AD-Gitlab/3.jpg">
+<meta property="og:image" content="https://huang0429.github.io/2023/07/28/%E3%80%90VM%E3%80%91windows-server-2019-%E5%AE%89%E8%A3%9D-Docker-%E4%B8%A6%E6%9E%B6%E8%A8%AD-Gitlab/4.jpg">
+<meta property="og:image" content="https://huang0429.github.io/2023/07/28/%E3%80%90VM%E3%80%91windows-server-2019-%E5%AE%89%E8%A3%9D-Docker-%E4%B8%A6%E6%9E%B6%E8%A8%AD-Gitlab/5.jpg">
+<meta property="og:image" content="https://huang0429.github.io/2023/07/28/%E3%80%90VM%E3%80%91windows-server-2019-%E5%AE%89%E8%A3%9D-Docker-%E4%B8%A6%E6%9E%B6%E8%A8%AD-Gitlab/6.jpg">
+<meta property="og:image" content="https://huang0429.github.io/2023/07/28/%E3%80%90VM%E3%80%91windows-server-2019-%E5%AE%89%E8%A3%9D-Docker-%E4%B8%A6%E6%9E%B6%E8%A8%AD-Gitlab/7.jpg">
+<meta property="og:image" content="https://huang0429.github.io/2023/07/28/%E3%80%90VM%E3%80%91windows-server-2019-%E5%AE%89%E8%A3%9D-Docker-%E4%B8%A6%E6%9E%B6%E8%A8%AD-Gitlab/8.jpg">
+<meta property="og:image" content="https://huang0429.github.io/2023/07/28/%E3%80%90VM%E3%80%91windows-server-2019-%E5%AE%89%E8%A3%9D-Docker-%E4%B8%A6%E6%9E%B6%E8%A8%AD-Gitlab/9.jpg">
+<meta property="og:image" content="https://huang0429.github.io/2023/07/28/%E3%80%90VM%E3%80%91windows-server-2019-%E5%AE%89%E8%A3%9D-Docker-%E4%B8%A6%E6%9E%B6%E8%A8%AD-Gitlab/10.jpg">
+<meta property="og:image" content="https://huang0429.github.io/2023/07/28/%E3%80%90VM%E3%80%91windows-server-2019-%E5%AE%89%E8%A3%9D-Docker-%E4%B8%A6%E6%9E%B6%E8%A8%AD-Gitlab/11.jpg">
+<meta property="og:image" content="https://huang0429.github.io/2023/07/28/%E3%80%90VM%E3%80%91windows-server-2019-%E5%AE%89%E8%A3%9D-Docker-%E4%B8%A6%E6%9E%B6%E8%A8%AD-Gitlab/12.jpg">
+<meta property="og:image" content="https://huang0429.github.io/2023/07/28/%E3%80%90VM%E3%80%91windows-server-2019-%E5%AE%89%E8%A3%9D-Docker-%E4%B8%A6%E6%9E%B6%E8%A8%AD-Gitlab/13.jpg">
+<meta property="og:image" content="https://huang0429.github.io/2023/07/28/%E3%80%90VM%E3%80%91windows-server-2019-%E5%AE%89%E8%A3%9D-Docker-%E4%B8%A6%E6%9E%B6%E8%A8%AD-Gitlab/14.jpg">
+<meta property="og:image" content="https://huang0429.github.io/2023/07/28/%E3%80%90VM%E3%80%91windows-server-2019-%E5%AE%89%E8%A3%9D-Docker-%E4%B8%A6%E6%9E%B6%E8%A8%AD-Gitlab/15.jpg">
+<meta property="og:image" content="https://huang0429.github.io/2023/07/28/%E3%80%90VM%E3%80%91windows-server-2019-%E5%AE%89%E8%A3%9D-Docker-%E4%B8%A6%E6%9E%B6%E8%A8%AD-Gitlab/16.jpg">
+<meta property="og:image" content="https://huang0429.github.io/2023/07/28/%E3%80%90VM%E3%80%91windows-server-2019-%E5%AE%89%E8%A3%9D-Docker-%E4%B8%A6%E6%9E%B6%E8%A8%AD-Gitlab/17.jpg">
+<meta property="og:image" content="https://huang0429.github.io/2023/07/28/%E3%80%90VM%E3%80%91windows-server-2019-%E5%AE%89%E8%A3%9D-Docker-%E4%B8%A6%E6%9E%B6%E8%A8%AD-Gitlab/18.jpg">
+<meta property="og:image" content="https://huang0429.github.io/2023/07/28/%E3%80%90VM%E3%80%91windows-server-2019-%E5%AE%89%E8%A3%9D-Docker-%E4%B8%A6%E6%9E%B6%E8%A8%AD-Gitlab/19.jpg">
+<meta property="og:image" content="https://huang0429.github.io/2023/07/28/%E3%80%90VM%E3%80%91windows-server-2019-%E5%AE%89%E8%A3%9D-Docker-%E4%B8%A6%E6%9E%B6%E8%A8%AD-Gitlab/20.jpg">
+<meta property="og:image" content="https://huang0429.github.io/2023/07/28/%E3%80%90VM%E3%80%91windows-server-2019-%E5%AE%89%E8%A3%9D-Docker-%E4%B8%A6%E6%9E%B6%E8%A8%AD-Gitlab/21.jpg">
+<meta property="og:image" content="https://huang0429.github.io/2023/07/28/%E3%80%90VM%E3%80%91windows-server-2019-%E5%AE%89%E8%A3%9D-Docker-%E4%B8%A6%E6%9E%B6%E8%A8%AD-Gitlab/22.jpg">
+<meta property="og:image" content="https://huang0429.github.io/2023/07/28/%E3%80%90VM%E3%80%91windows-server-2019-%E5%AE%89%E8%A3%9D-Docker-%E4%B8%A6%E6%9E%B6%E8%A8%AD-Gitlab/23.jpg">
+<meta property="og:image" content="https://huang0429.github.io/2023/07/28/%E3%80%90VM%E3%80%91windows-server-2019-%E5%AE%89%E8%A3%9D-Docker-%E4%B8%A6%E6%9E%B6%E8%A8%AD-Gitlab/24.jpg">
+<meta property="og:image" content="https://huang0429.github.io/2023/07/28/%E3%80%90VM%E3%80%91windows-server-2019-%E5%AE%89%E8%A3%9D-Docker-%E4%B8%A6%E6%9E%B6%E8%A8%AD-Gitlab/25.jpg">
+<meta property="og:image" content="https://huang0429.github.io/2023/07/28/%E3%80%90VM%E3%80%91windows-server-2019-%E5%AE%89%E8%A3%9D-Docker-%E4%B8%A6%E6%9E%B6%E8%A8%AD-Gitlab/26.jpg">
+<meta property="og:image" content="https://huang0429.github.io/2023/07/28/%E3%80%90VM%E3%80%91windows-server-2019-%E5%AE%89%E8%A3%9D-Docker-%E4%B8%A6%E6%9E%B6%E8%A8%AD-Gitlab/27.jpg">
+<meta property="og:image" content="https://huang0429.github.io/2023/07/28/%E3%80%90VM%E3%80%91windows-server-2019-%E5%AE%89%E8%A3%9D-Docker-%E4%B8%A6%E6%9E%B6%E8%A8%AD-Gitlab/28.jpg">
+<meta property="og:image" content="https://huang0429.github.io/2023/07/28/%E3%80%90VM%E3%80%91windows-server-2019-%E5%AE%89%E8%A3%9D-Docker-%E4%B8%A6%E6%9E%B6%E8%A8%AD-Gitlab/29.jpg">
+<meta property="og:image" content="https://huang0429.github.io/2023/07/28/%E3%80%90VM%E3%80%91windows-server-2019-%E5%AE%89%E8%A3%9D-Docker-%E4%B8%A6%E6%9E%B6%E8%A8%AD-Gitlab/30.jpg">
+<meta property="og:image" content="https://huang0429.github.io/2023/07/28/%E3%80%90VM%E3%80%91windows-server-2019-%E5%AE%89%E8%A3%9D-Docker-%E4%B8%A6%E6%9E%B6%E8%A8%AD-Gitlab/31.jpg">
+<meta property="og:image" content="https://huang0429.github.io/2023/07/28/%E3%80%90VM%E3%80%91windows-server-2019-%E5%AE%89%E8%A3%9D-Docker-%E4%B8%A6%E6%9E%B6%E8%A8%AD-Gitlab/32.jpg">
+<meta property="og:image" content="https://huang0429.github.io/2023/07/28/%E3%80%90VM%E3%80%91windows-server-2019-%E5%AE%89%E8%A3%9D-Docker-%E4%B8%A6%E6%9E%B6%E8%A8%AD-Gitlab/33.jpg">
+<meta property="og:image" content="https://huang0429.github.io/2023/07/28/%E3%80%90VM%E3%80%91windows-server-2019-%E5%AE%89%E8%A3%9D-Docker-%E4%B8%A6%E6%9E%B6%E8%A8%AD-Gitlab/34.jpg">
+<meta property="og:image" content="https://huang0429.github.io/2023/07/28/%E3%80%90VM%E3%80%91windows-server-2019-%E5%AE%89%E8%A3%9D-Docker-%E4%B8%A6%E6%9E%B6%E8%A8%AD-Gitlab/35.jpg">
+<meta property="og:image" content="https://huang0429.github.io/2023/07/28/%E3%80%90VM%E3%80%91windows-server-2019-%E5%AE%89%E8%A3%9D-Docker-%E4%B8%A6%E6%9E%B6%E8%A8%AD-Gitlab/36.jpg">
+<meta property="article:published_time" content="2023-07-28T08:21:02.000Z">
+<meta property="article:modified_time" content="2023-07-28T08:21:02.000Z">
+<meta property="article:author" content="黃筱珮">
+<meta property="article:tag" content="GitLab">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://huang0429.github.io/2023/07/28/%E3%80%90VM%E3%80%91windows-server-2019-%E5%AE%89%E8%A3%9D-Docker-%E4%B8%A6%E6%9E%B6%E8%A8%AD-Gitlab/1.jpg">
+
+<link rel="canonical" href="https://huang0429.github.io/2023/07/28/%E3%80%90VM%E3%80%91windows-server-2019-%E5%AE%89%E8%A3%9D-Docker-%E4%B8%A6%E6%9E%B6%E8%A8%AD-Gitlab/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-TW'
+  };
+</script>
+
+  <title>【VM】windows server 2019 安裝 Docker 並架設 Gitlab | 天下第一不是我</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">天下第一不是我</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">我學的很快樂</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤<span class="badge">5</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類<span class="badge">5</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔<span class="badge">6</span></a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://huang0429.github.io/2023/07/28/%E3%80%90VM%E3%80%91windows-server-2019-%E5%AE%89%E8%A3%9D-Docker-%E4%B8%A6%E6%9E%B6%E8%A8%AD-Gitlab/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/../images/avatar.png">
+      <meta itemprop="name" content="黃筱珮">
+      <meta itemprop="description" content="不要把我看的太重，因為我贏不了你">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="天下第一不是我">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          【VM】windows server 2019 安裝 Docker 並架設 Gitlab
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2023-07-28 16:21:02" itemprop="dateCreated datePublished" datetime="2023-07-28T16:21:02+08:00">2023-07-28</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Docker/" itemprop="url" rel="index"><span itemprop="name">Docker</span></a>
+                </span>
+            </span>
+
+          
+            <div class="post-description"> </div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="說明"><a href="#說明" class="headerlink" title="說明"></a>說明</h1><p>docker CPU至少給4核，記憶體要有8GB<br>需要連外網<br>windows server 2019 要先更新</p>
+<p>下載 chrome<br><a target="_blank" rel="noopener" href="https://www.google.com/intl/zh-TW/chrome/">https://www.google.com/intl/zh-TW/chrome/</a></p>
+<p>下載 VSCode(也可以用記事本)<br><a target="_blank" rel="noopener" href="https://code.visualstudio.com/download">https://code.visualstudio.com/download</a></p>
+<h1 id="首先先開啟以下功能"><a href="#首先先開啟以下功能" class="headerlink" title="首先先開啟以下功能"></a>首先先開啟以下功能</h1><ol>
+<li>Windows Hypervisor平台</li>
+<li>Windows 子系統 Linux 版</li>
+<li>容器</li>
+</ol>
+<p>打開儀表板，選擇「 新增角色及功能 」</p>
+<img src="/2023/07/28/%E3%80%90VM%E3%80%91windows-server-2019-%E5%AE%89%E8%A3%9D-Docker-%E4%B8%A6%E6%9E%B6%E8%A8%AD-Gitlab/1.jpg" class>
+
+
+
+<img src="/2023/07/28/%E3%80%90VM%E3%80%91windows-server-2019-%E5%AE%89%E8%A3%9D-Docker-%E4%B8%A6%E6%9E%B6%E8%A8%AD-Gitlab/3.jpg" class>
+
+<p>拉到最下面</p>
+<img src="/2023/07/28/%E3%80%90VM%E3%80%91windows-server-2019-%E5%AE%89%E8%A3%9D-Docker-%E4%B8%A6%E6%9E%B6%E8%A8%AD-Gitlab/4.jpg" class>
+
+<p>安裝完後，電腦要重啟</p>
+<h1 id="檢查有沒有-wsl"><a href="#檢查有沒有-wsl" class="headerlink" title="檢查有沒有 wsl"></a>檢查有沒有 wsl</h1><p>打開 PowerShell</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">wsl<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<img src="/2023/07/28/%E3%80%90VM%E3%80%91windows-server-2019-%E5%AE%89%E8%A3%9D-Docker-%E4%B8%A6%E6%9E%B6%E8%A8%AD-Gitlab/5.jpg" class>
+
+<p>如果出現上圖，表示有 wsl </p>
+<h1 id="安裝OpenSSH"><a href="#安裝OpenSSH" class="headerlink" title="安裝OpenSSH"></a>安裝OpenSSH</h1><h2 id="確認-OpenSSH-可供使用"><a href="#確認-OpenSSH-可供使用" class="headerlink" title="確認 OpenSSH 可供使用"></a>確認 OpenSSH 可供使用</h2><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">Get-WindowsCapability <span class="token parameter variable">-Online</span> <span class="token operator">|</span> Where-Object Name <span class="token parameter variable">-like</span> <span class="token string">'OpenSSH*'</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>如果都沒有安裝會如下列：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">Name  <span class="token builtin class-name">:</span> OpenSSH.Client~~~~0.0.1.0
+State <span class="token builtin class-name">:</span> NotPresent
+
+Name  <span class="token builtin class-name">:</span> OpenSSH.Server~~~~0.0.1.0
+State <span class="token builtin class-name">:</span> NotPresent<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>一般來說都會是 Server 沒有安裝</p>
+<h2 id="安裝-OpenSSH-Server-or-Client"><a href="#安裝-OpenSSH-Server-or-Client" class="headerlink" title="安裝 OpenSSH Server or Client"></a>安裝 OpenSSH Server or Client</h2><p>看哪個沒裝就裝哪個</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># Install the OpenSSH Client</span>
+Add-WindowsCapability <span class="token parameter variable">-Online</span> <span class="token parameter variable">-Name</span> OpenSSH.Client~~~~0.0.1.0
+
+<span class="token comment"># Install the OpenSSH Server</span>
+Add-WindowsCapability <span class="token parameter variable">-Online</span> <span class="token parameter variable">-Name</span> OpenSSH.Server~~~~0.0.1.0<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+<h1 id="Download-Docker-Desktop"><a href="#Download-Docker-Desktop" class="headerlink" title="Download Docker Desktop"></a>Download Docker Desktop</h1><p>在安裝的時候，電腦必須是更新過的。</p>
+<img src="/2023/07/28/%E3%80%90VM%E3%80%91windows-server-2019-%E5%AE%89%E8%A3%9D-Docker-%E4%B8%A6%E6%9E%B6%E8%A8%AD-Gitlab/6.jpg" class>
+
+<p>安裝需要一點時間。</p>
+<img src="/2023/07/28/%E3%80%90VM%E3%80%91windows-server-2019-%E5%AE%89%E8%A3%9D-Docker-%E4%B8%A6%E6%9E%B6%E8%A8%AD-Gitlab/7.jpg" class>
+
+<p>安裝完後重新開機（會自動重新開機）<br>有時候不會重開機</p>
+<p>重開機之後，Docker會自動啟動，如果 windows 沒有更新，可能會出現警告訊息。<br>用了幾台虛擬機測試，如果不更新也不會有什麼問題，但是如果未來要更新 Docker 可能會無法更新。</p>
+<img src="/2023/07/28/%E3%80%90VM%E3%80%91windows-server-2019-%E5%AE%89%E8%A3%9D-Docker-%E4%B8%A6%E6%9E%B6%E8%A8%AD-Gitlab/8.jpg" class>
+
+<p>接下來會請你登入</p>
+<p>不登入也可以</p>
+<img src="/2023/07/28/%E3%80%90VM%E3%80%91windows-server-2019-%E5%AE%89%E8%A3%9D-Docker-%E4%B8%A6%E6%9E%B6%E8%A8%AD-Gitlab/9.jpg" class>
+
+<h1 id="進入-Docker-畫面"><a href="#進入-Docker-畫面" class="headerlink" title="進入 Docker 畫面"></a>進入 Docker 畫面</h1><img src="/2023/07/28/%E3%80%90VM%E3%80%91windows-server-2019-%E5%AE%89%E8%A3%9D-Docker-%E4%B8%A6%E6%9E%B6%E8%A8%AD-Gitlab/10.jpg" class>
+
+<h1 id="設定環境資源"><a href="#設定環境資源" class="headerlink" title="設定環境資源"></a>設定環境資源</h1><img src="/2023/07/28/%E3%80%90VM%E3%80%91windows-server-2019-%E5%AE%89%E8%A3%9D-Docker-%E4%B8%A6%E6%9E%B6%E8%A8%AD-Gitlab/11.jpg" class>
+
+<img src="/2023/07/28/%E3%80%90VM%E3%80%91windows-server-2019-%E5%AE%89%E8%A3%9D-Docker-%E4%B8%A6%E6%9E%B6%E8%A8%AD-Gitlab/12.jpg" class>
+
+<h3 id="虛擬機測試安裝，建議-CPU-至少-4，記憶體至少-8GB-，Swap-2GB，GitLab-跑起來比較不會卡。"><a href="#虛擬機測試安裝，建議-CPU-至少-4，記憶體至少-8GB-，Swap-2GB，GitLab-跑起來比較不會卡。" class="headerlink" title="虛擬機測試安裝，建議 CPU 至少 4，記憶體至少 8GB ，Swap 2GB，GitLab 跑起來比較不會卡。"></a>虛擬機測試安裝，建議 CPU 至少 4，記憶體至少 8GB ，Swap 2GB，GitLab 跑起來比較不會卡。</h3><img src="/2023/07/28/%E3%80%90VM%E3%80%91windows-server-2019-%E5%AE%89%E8%A3%9D-Docker-%E4%B8%A6%E6%9E%B6%E8%A8%AD-Gitlab/13.jpg" class>
+
+<h1 id="Git-downloads"><a href="#Git-downloads" class="headerlink" title="Git downloads"></a>Git downloads</h1><img src="/2023/07/28/%E3%80%90VM%E3%80%91windows-server-2019-%E5%AE%89%E8%A3%9D-Docker-%E4%B8%A6%E6%9E%B6%E8%A8%AD-Gitlab/14.jpg" class>
+
+<p>安裝測試一下有沒有安裝成功：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> <span class="token parameter variable">--version</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<img src="/2023/07/28/%E3%80%90VM%E3%80%91windows-server-2019-%E5%AE%89%E8%A3%9D-Docker-%E4%B8%A6%E6%9E%B6%E8%A8%AD-Gitlab/15.jpg" class>
+
+
+<h1 id="下載-GitLab"><a href="#下載-GitLab" class="headerlink" title="下載 GitLab"></a>下載 GitLab</h1><img src="/2023/07/28/%E3%80%90VM%E3%80%91windows-server-2019-%E5%AE%89%E8%A3%9D-Docker-%E4%B8%A6%E6%9E%B6%E8%A8%AD-Gitlab/16.jpg" class>
+
+<p>在 Docker 最上方的搜尋列內輸入 「 gitlab-ce 」</p>
+<p>選擇下載數較高的，然後按 「 Pull 」，下載會需要一點時間。</p>
+<img src="/2023/07/28/%E3%80%90VM%E3%80%91windows-server-2019-%E5%AE%89%E8%A3%9D-Docker-%E4%B8%A6%E6%9E%B6%E8%A8%AD-Gitlab/17.jpg" class>
+
+<p>這個時候 Images 就下載了 gitlab </p>
+<h1 id="設定GitLab資料儲存的地方（有三種方法）"><a href="#設定GitLab資料儲存的地方（有三種方法）" class="headerlink" title="設定GitLab資料儲存的地方（有三種方法）"></a>設定GitLab資料儲存的地方（有三種方法）</h1><h2 id="方法一：docker-compose"><a href="#方法一：docker-compose" class="headerlink" title="方法一：docker-compose"></a>方法一：docker-compose</h2><h3 id="新增以下資料夾：-自訂"><a href="#新增以下資料夾：-自訂" class="headerlink" title="新增以下資料夾：(自訂)"></a>新增以下資料夾：(自訂)</h3><p>C:\Docker_Data\GitLab03_Data\config</p>
+<img src="/2023/07/28/%E3%80%90VM%E3%80%91windows-server-2019-%E5%AE%89%E8%A3%9D-Docker-%E4%B8%A6%E6%9E%B6%E8%A8%AD-Gitlab/18.jpg" class>
+
+
+<h3 id="新增-docker-compose-yml"><a href="#新增-docker-compose-yml" class="headerlink" title="新增 docker-compose.yml"></a>新增 docker-compose.yml</h3><p>檔案通常我會建在Docker_Data的同層</p>
+<p>檔案內容：</p>
+<pre class="line-numbers language-yaml" data-language="yaml"><code class="language-yaml"><span class="token key atrule">version</span><span class="token punctuation">:</span> <span class="token string">'3'</span>
+<span class="token key atrule">services</span><span class="token punctuation">:</span>
+  <span class="token key atrule">gitlab</span><span class="token punctuation">:</span>
+    <span class="token key atrule">container_name</span><span class="token punctuation">:</span> gitlab03
+    <span class="token key atrule">image</span><span class="token punctuation">:</span> gitlab/gitlab<span class="token punctuation">-</span>ce<span class="token punctuation">:</span>latest
+    <span class="token key atrule">restart</span><span class="token punctuation">:</span> always
+    <span class="token key atrule">ports</span><span class="token punctuation">:</span>
+      <span class="token punctuation">-</span> 8080<span class="token punctuation">:</span><span class="token number">80</span>
+      <span class="token punctuation">-</span> 4433<span class="token punctuation">:</span><span class="token number">443</span>
+      <span class="token punctuation">-</span> 2222<span class="token punctuation">:</span><span class="token number">22</span>
+    <span class="token key atrule">volumes</span><span class="token punctuation">:</span>
+      <span class="token punctuation">-</span> <span class="token string">'E:\Docker_Data\Gitlab Server\config:/etc/gitlab'</span>
+      <span class="token punctuation">-</span> <span class="token string">'E:\Docker_Data\Gitlab Server\logs:/var/log/gitlab'</span>
+      <span class="token punctuation">-</span> <span class="token string">'E:\Docker_Data\Gitlab Server\data:/var/opt/gitlab'</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>以上面寫法來說～<br>volumes的設定會把容器的資料放在E槽裡面，放在E槽裡可以方便查看內容，如果不小心把容器刪除掉，也不用擔心資料會不見。可是目前這種寫法，雖然可以寫入資料，但是 Gitlab 會無法啟動成功，原因還沒有去查。曾經有一次使用舊版且別人優化過的 GitLab Image，有成功啟動過，不過因為太舊，所以就沒有使用了。</p>
+<p>後來改用下列的寫法～</p>
+<h3 id="另一個寫法："><a href="#另一個寫法：" class="headerlink" title="另一個寫法："></a>另一個寫法：</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">version: <span class="token string">'3'</span>
+services:
+  gitlab:
+    container_name: gitlab01
+    image: gitlab/gitlab-ce:latest
+    restart: always
+    ports:
+      - <span class="token number">8080</span>:80
+      - <span class="token number">4433</span>:443
+      - <span class="token number">2222</span>:22
+    volumes:
+      - E:<span class="token punctuation">\</span>docker<span class="token punctuation">\</span>gitlab<span class="token punctuation">\</span>config:/etc/gitlab
+      - gitlab-logs:/var/log/gitlab
+      - gitlab-data:/var/opt/gitlab
+volumes:
+  gitlab-logs:
+  gitlab-data:<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>container_name: 是設定容器的名稱。</p>
+<p>volumes: 是 gitlab01 容器資料要放置的地方。</p>
+<p>config：後面是原本容器資料的擺放位置，這個寫法是要將後者映射到前者。</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">volumes:
+      - E:<span class="token punctuation">\</span>docker<span class="token punctuation">\</span>gitlab<span class="token punctuation">\</span>config:/etc/gitlab
+      - gitlab-logs:/var/log/gitlab
+      - gitlab-data:/var/opt/gitlab
+      
+<span class="token comment"># E槽的資料就儲存在上列所設的位址</span>
+<span class="token comment"># 而 gitlab-logs 跟 gitlab-data 則是儲存在 Docker 裡面</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="啟動-images"><a href="#啟動-images" class="headerlink" title="啟動 images"></a>啟動 images</h2><p>打開 PowerShell</p>
+<p>將位置移到 docker-compose.yml 的同一層。</p>
+<p>然後輸入指令：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">docker-compose</span> <span class="token parameter variable">-p</span> <span class="token function">docker-compose</span> up <span class="token parameter variable">-d</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>指令的第二個 docker-compose 是檔案名稱</p>
+<p>這個指令也會順便啟動 Images</p>
+<img src="/2023/07/28/%E3%80%90VM%E3%80%91windows-server-2019-%E5%AE%89%E8%A3%9D-Docker-%E4%B8%A6%E6%9E%B6%E8%A8%AD-Gitlab/19.jpg" class>
+
+
+<img src="/2023/07/28/%E3%80%90VM%E3%80%91windows-server-2019-%E5%AE%89%E8%A3%9D-Docker-%E4%B8%A6%E6%9E%B6%E8%A8%AD-Gitlab/20.jpg" class>
+
+<p>第一次啟動可能會久一些</p>
+<p>啟動成功</p>
+<img src="/2023/07/28/%E3%80%90VM%E3%80%91windows-server-2019-%E5%AE%89%E8%A3%9D-Docker-%E4%B8%A6%E6%9E%B6%E8%A8%AD-Gitlab/21.jpg" class>
+
+<h2 id="第二種方法-直接用-docker-run-指令"><a href="#第二種方法-直接用-docker-run-指令" class="headerlink" title="第二種方法 - 直接用 docker run 指令"></a>第二種方法 - 直接用 docker run 指令</h2><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">docker</span> run <span class="token parameter variable">-d</span> <span class="token parameter variable">--hostname</span> localhost <span class="token parameter variable">--publish</span> <span class="token number">4433</span>:443 <span class="token parameter variable">--publish</span> <span class="token number">8080</span>:80 <span class="token parameter variable">--publish</span> <span class="token number">2222</span>:22 <span class="token parameter variable">--name</span> gitlab <span class="token parameter variable">--restart</span> always <span class="token parameter variable">--volume</span> “C:/Docker_Data/GitLab_Data/config”:/etc/gitlab <span class="token parameter variable">--volume</span> “C:/Docker_Data/GitLab_Data/logs”:/var/log/gitlab <span class="token parameter variable">--volume</span> “C:/Docker_Data/GitLab_Data/data”:/var/opt/gitlab <span class="token parameter variable">--user</span> win-806blb7krml --shm-size 256m gitlab/gitlab-ce:latest<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>很多人都使用這種方法，但是我一直都試不成功，雖然指令下了之後，映射資料夾都會自動設定好，裡面也會有資料寫進去，但是 GitLab 網頁就一直沒有辦法打開，所以這個方法我是不推薦的。</p>
+<h2 id="第三種方法-在啟動時直接設定"><a href="#第三種方法-在啟動時直接設定" class="headerlink" title="第三種方法 - 在啟動時直接設定"></a>第三種方法 - 在啟動時直接設定</h2><img src="/2023/07/28/%E3%80%90VM%E3%80%91windows-server-2019-%E5%AE%89%E8%A3%9D-Docker-%E4%B8%A6%E6%9E%B6%E8%A8%AD-Gitlab/22.jpg" class>
+
+
+<p>第一次啟動時，按這個啟動鍵，會出現一個設定畫面，可以設定端口及儲存的位址，這個方法只要設定資料儲存，GitLab 都無法啟動成功，如果只設定端口，GitLab 就可以正常啟動，在網路上看了很多資料，大部份都說是權限的問題，但是還沒有成功處理好，所以我也不推薦這個方法。</p>
+<h1 id="gitlab-初次密碼"><a href="#gitlab-初次密碼" class="headerlink" title="gitlab 初次密碼"></a>gitlab 初次密碼</h1><p>密碼要在安裝後24小時內用指令取得，不然就拿不出來了。</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">docker</span> <span class="token builtin class-name">exec</span> <span class="token parameter variable">-it</span> gitlab2 <span class="token function">grep</span> <span class="token string">'Password:'</span> /etc/gitlab/initial_root_password<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<img src="/2023/07/28/%E3%80%90VM%E3%80%91windows-server-2019-%E5%AE%89%E8%A3%9D-Docker-%E4%B8%A6%E6%9E%B6%E8%A8%AD-Gitlab/23.jpg" class>
+
+<p>成功進入</p>
+<img src="/2023/07/28/%E3%80%90VM%E3%80%91windows-server-2019-%E5%AE%89%E8%A3%9D-Docker-%E4%B8%A6%E6%9E%B6%E8%A8%AD-Gitlab/24.jpg" class>
+
+<h2 id="進入後馬上更換密碼"><a href="#進入後馬上更換密碼" class="headerlink" title="進入後馬上更換密碼"></a>進入後馬上更換密碼</h2><p>更換密碼後會強制重新登入</p>
+<h1 id="新增使用者"><a href="#新增使用者" class="headerlink" title="新增使用者"></a>新增使用者</h1><img src="/2023/07/28/%E3%80%90VM%E3%80%91windows-server-2019-%E5%AE%89%E8%A3%9D-Docker-%E4%B8%A6%E6%9E%B6%E8%A8%AD-Gitlab/25.jpg" class>
+
+<h3 id="在新增使用者後，要再進入使用者的頁面新增密碼，這個密碼是臨時密碼，當使用者用臨時密碼登入時，系統會要求使用者更新密碼。"><a href="#在新增使用者後，要再進入使用者的頁面新增密碼，這個密碼是臨時密碼，當使用者用臨時密碼登入時，系統會要求使用者更新密碼。" class="headerlink" title="在新增使用者後，要再進入使用者的頁面新增密碼，這個密碼是臨時密碼，當使用者用臨時密碼登入時，系統會要求使用者更新密碼。"></a>在新增使用者後，要再進入使用者的頁面新增密碼，這個密碼是臨時密碼，當使用者用臨時密碼登入時，系統會要求使用者更新密碼。</h3><img src="/2023/07/28/%E3%80%90VM%E3%80%91windows-server-2019-%E5%AE%89%E8%A3%9D-Docker-%E4%B8%A6%E6%9E%B6%E8%A8%AD-Gitlab/26.jpg" class>
+
+<img src="/2023/07/28/%E3%80%90VM%E3%80%91windows-server-2019-%E5%AE%89%E8%A3%9D-Docker-%E4%B8%A6%E6%9E%B6%E8%A8%AD-Gitlab/27.jpg" class>
+
+<p>更新後記得要按儲存</p>
+<h3 id="使用者要進入-GitLab-時，可以輸入-Username-或是-Email-都可以。"><a href="#使用者要進入-GitLab-時，可以輸入-Username-或是-Email-都可以。" class="headerlink" title="使用者要進入 GitLab 時，可以輸入 Username 或是 Email 都可以。"></a>使用者要進入 GitLab 時，可以輸入 Username 或是 Email 都可以。</h3><h1 id="設定-ssh-key"><a href="#設定-ssh-key" class="headerlink" title="設定 ssh key"></a>設定 ssh key</h1><h2 id="查看是否有-ssh"><a href="#查看是否有-ssh" class="headerlink" title="查看是否有 ssh"></a>查看是否有 ssh</h2><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">ls</span> <span class="token parameter variable">-al</span> ~/.ssh<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h2 id="建-SSH-Key"><a href="#建-SSH-Key" class="headerlink" title="建 SSH Key"></a>建 SSH Key</h2><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">ssh-keygen <span class="token parameter variable">-t</span> rsa <span class="token parameter variable">-b</span> <span class="token number">4096</span> <span class="token parameter variable">-C</span> <span class="token string">"your_email@example.com"</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<img src="/2023/07/28/%E3%80%90VM%E3%80%91windows-server-2019-%E5%AE%89%E8%A3%9D-Docker-%E4%B8%A6%E6%9E%B6%E8%A8%AD-Gitlab/28.jpg" class>
+
+<h2 id="下指令顯示SSH-Key"><a href="#下指令顯示SSH-Key" class="headerlink" title="下指令顯示SSH Key"></a>下指令顯示SSH Key</h2><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">cat</span> ~/.ssh/id_rsa.pub<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<img src="/2023/07/28/%E3%80%90VM%E3%80%91windows-server-2019-%E5%AE%89%E8%A3%9D-Docker-%E4%B8%A6%E6%9E%B6%E8%A8%AD-Gitlab/29.jpg" class>
+
+<p>把生產出來的文字都拷貝起來</p>
+<h2 id="將公鑰放到-GitLab"><a href="#將公鑰放到-GitLab" class="headerlink" title="將公鑰放到 GitLab"></a>將公鑰放到 GitLab</h2><p>找到個人頭像，然後選擇 Preferences</p>
+<img src="/2023/07/28/%E3%80%90VM%E3%80%91windows-server-2019-%E5%AE%89%E8%A3%9D-Docker-%E4%B8%A6%E6%9E%B6%E8%A8%AD-Gitlab/30.jpg" class>
+
+<p>找到 SSH Keys</p>
+<img src="/2023/07/28/%E3%80%90VM%E3%80%91windows-server-2019-%E5%AE%89%E8%A3%9D-Docker-%E4%B8%A6%E6%9E%B6%E8%A8%AD-Gitlab/31.jpg" class>
+
+<p>把剛剛拷貝起來的文字貼到 Key 的框框內</p>
+<p>然後 Title 自取，填好就按最下面的 Add Key</p>
+<img src="/2023/07/28/%E3%80%90VM%E3%80%91windows-server-2019-%E5%AE%89%E8%A3%9D-Docker-%E4%B8%A6%E6%9E%B6%E8%A8%AD-Gitlab/32.jpg" class>
+
+<h1 id="測試是否可以新增專案"><a href="#測試是否可以新增專案" class="headerlink" title="測試是否可以新增專案"></a>測試是否可以新增專案</h1><h2 id="新增專案"><a href="#新增專案" class="headerlink" title="新增專案"></a>新增專案</h2><img src="/2023/07/28/%E3%80%90VM%E3%80%91windows-server-2019-%E5%AE%89%E8%A3%9D-Docker-%E4%B8%A6%E6%9E%B6%E8%A8%AD-Gitlab/33.jpg" class>
+
+<p>以下表示新增成功</p>
+<img src="/2023/07/28/%E3%80%90VM%E3%80%91windows-server-2019-%E5%AE%89%E8%A3%9D-Docker-%E4%B8%A6%E6%9E%B6%E8%A8%AD-Gitlab/34.jpg" class>
+
+<h2 id="測試-git-clone-ssh"><a href="#測試-git-clone-ssh" class="headerlink" title="測試 git clone ssh"></a>測試 git clone ssh</h2><ul>
+<li>如果沒有放公鑰到 GitLab 裡面，就無法使用 ssh 來下載</li>
+</ul>
+<h2 id="測試-git-clone-http"><a href="#測試-git-clone-http" class="headerlink" title="測試 git clone http"></a>測試 git clone http</h2><ul>
+<li>如果無法 git clone http 多半是端口沒開</li>
+<li>因為是 VM ，所以在主機後面要加 8080 （8080是我設的）</li>
+<li>遠端伺服器管理工具要開</li>
+</ul>
+<img src="/2023/07/28/%E3%80%90VM%E3%80%91windows-server-2019-%E5%AE%89%E8%A3%9D-Docker-%E4%B8%A6%E6%9E%B6%E8%A8%AD-Gitlab/35.jpg" class>
+
+<ul>
+<li>網頁伺服器要打開</li>
+</ul>
+<img src="/2023/07/28/%E3%80%90VM%E3%80%91windows-server-2019-%E5%AE%89%E8%A3%9D-Docker-%E4%B8%A6%E6%9E%B6%E8%A8%AD-Gitlab/36.jpg" class>
+
+
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/GitLab/" rel="tag"># GitLab</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2023/07/27/%E3%80%90Objective-c%E3%80%91%E5%BD%88%E5%87%BA%E8%A8%8A%E6%81%AF%E8%A6%96%E7%AA%97/" rel="prev" title="【Objective-c】彈出訊息視窗">
+      <i class="fa fa-chevron-left"></i> 【Objective-c】彈出訊息視窗
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AA%AA%E6%98%8E"><span class="nav-number">1.</span> <span class="nav-text">說明</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%A6%96%E5%85%88%E5%85%88%E9%96%8B%E5%95%9F%E4%BB%A5%E4%B8%8B%E5%8A%9F%E8%83%BD"><span class="nav-number">2.</span> <span class="nav-text">首先先開啟以下功能</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%AA%A2%E6%9F%A5%E6%9C%89%E6%B2%92%E6%9C%89-wsl"><span class="nav-number">3.</span> <span class="nav-text">檢查有沒有 wsl</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%89%E8%A3%9DOpenSSH"><span class="nav-number">4.</span> <span class="nav-text">安裝OpenSSH</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A2%BA%E8%AA%8D-OpenSSH-%E5%8F%AF%E4%BE%9B%E4%BD%BF%E7%94%A8"><span class="nav-number">4.1.</span> <span class="nav-text">確認 OpenSSH 可供使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%9D-OpenSSH-Server-or-Client"><span class="nav-number">4.2.</span> <span class="nav-text">安裝 OpenSSH Server or Client</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Download-Docker-Desktop"><span class="nav-number">5.</span> <span class="nav-text">Download Docker Desktop</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%80%B2%E5%85%A5-Docker-%E7%95%AB%E9%9D%A2"><span class="nav-number">6.</span> <span class="nav-text">進入 Docker 畫面</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%A8%AD%E5%AE%9A%E7%92%B0%E5%A2%83%E8%B3%87%E6%BA%90"><span class="nav-number">7.</span> <span class="nav-text">設定環境資源</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%99%9B%E6%93%AC%E6%A9%9F%E6%B8%AC%E8%A9%A6%E5%AE%89%E8%A3%9D%EF%BC%8C%E5%BB%BA%E8%AD%B0-CPU-%E8%87%B3%E5%B0%91-4%EF%BC%8C%E8%A8%98%E6%86%B6%E9%AB%94%E8%87%B3%E5%B0%91-8GB-%EF%BC%8CSwap-2GB%EF%BC%8CGitLab-%E8%B7%91%E8%B5%B7%E4%BE%86%E6%AF%94%E8%BC%83%E4%B8%8D%E6%9C%83%E5%8D%A1%E3%80%82"><span class="nav-number">7.0.1.</span> <span class="nav-text">虛擬機測試安裝，建議 CPU 至少 4，記憶體至少 8GB ，Swap 2GB，GitLab 跑起來比較不會卡。</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Git-downloads"><span class="nav-number">8.</span> <span class="nav-text">Git downloads</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%8B%E8%BC%89-GitLab"><span class="nav-number">9.</span> <span class="nav-text">下載 GitLab</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%A8%AD%E5%AE%9AGitLab%E8%B3%87%E6%96%99%E5%84%B2%E5%AD%98%E7%9A%84%E5%9C%B0%E6%96%B9%EF%BC%88%E6%9C%89%E4%B8%89%E7%A8%AE%E6%96%B9%E6%B3%95%EF%BC%89"><span class="nav-number">10.</span> <span class="nav-text">設定GitLab資料儲存的地方（有三種方法）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%B9%E6%B3%95%E4%B8%80%EF%BC%9Adocker-compose"><span class="nav-number">10.1.</span> <span class="nav-text">方法一：docker-compose</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B0%E5%A2%9E%E4%BB%A5%E4%B8%8B%E8%B3%87%E6%96%99%E5%A4%BE%EF%BC%9A-%E8%87%AA%E8%A8%82"><span class="nav-number">10.1.1.</span> <span class="nav-text">新增以下資料夾：(自訂)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B0%E5%A2%9E-docker-compose-yml"><span class="nav-number">10.1.2.</span> <span class="nav-text">新增 docker-compose.yml</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%A6%E4%B8%80%E5%80%8B%E5%AF%AB%E6%B3%95%EF%BC%9A"><span class="nav-number">10.1.3.</span> <span class="nav-text">另一個寫法：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%95%9F%E5%8B%95-images"><span class="nav-number">10.2.</span> <span class="nav-text">啟動 images</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%BA%8C%E7%A8%AE%E6%96%B9%E6%B3%95-%E7%9B%B4%E6%8E%A5%E7%94%A8-docker-run-%E6%8C%87%E4%BB%A4"><span class="nav-number">10.3.</span> <span class="nav-text">第二種方法 - 直接用 docker run 指令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%B8%89%E7%A8%AE%E6%96%B9%E6%B3%95-%E5%9C%A8%E5%95%9F%E5%8B%95%E6%99%82%E7%9B%B4%E6%8E%A5%E8%A8%AD%E5%AE%9A"><span class="nav-number">10.4.</span> <span class="nav-text">第三種方法 - 在啟動時直接設定</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#gitlab-%E5%88%9D%E6%AC%A1%E5%AF%86%E7%A2%BC"><span class="nav-number">11.</span> <span class="nav-text">gitlab 初次密碼</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%B2%E5%85%A5%E5%BE%8C%E9%A6%AC%E4%B8%8A%E6%9B%B4%E6%8F%9B%E5%AF%86%E7%A2%BC"><span class="nav-number">11.1.</span> <span class="nav-text">進入後馬上更換密碼</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%96%B0%E5%A2%9E%E4%BD%BF%E7%94%A8%E8%80%85"><span class="nav-number">12.</span> <span class="nav-text">新增使用者</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9C%A8%E6%96%B0%E5%A2%9E%E4%BD%BF%E7%94%A8%E8%80%85%E5%BE%8C%EF%BC%8C%E8%A6%81%E5%86%8D%E9%80%B2%E5%85%A5%E4%BD%BF%E7%94%A8%E8%80%85%E7%9A%84%E9%A0%81%E9%9D%A2%E6%96%B0%E5%A2%9E%E5%AF%86%E7%A2%BC%EF%BC%8C%E9%80%99%E5%80%8B%E5%AF%86%E7%A2%BC%E6%98%AF%E8%87%A8%E6%99%82%E5%AF%86%E7%A2%BC%EF%BC%8C%E7%95%B6%E4%BD%BF%E7%94%A8%E8%80%85%E7%94%A8%E8%87%A8%E6%99%82%E5%AF%86%E7%A2%BC%E7%99%BB%E5%85%A5%E6%99%82%EF%BC%8C%E7%B3%BB%E7%B5%B1%E6%9C%83%E8%A6%81%E6%B1%82%E4%BD%BF%E7%94%A8%E8%80%85%E6%9B%B4%E6%96%B0%E5%AF%86%E7%A2%BC%E3%80%82"><span class="nav-number">12.0.1.</span> <span class="nav-text">在新增使用者後，要再進入使用者的頁面新增密碼，這個密碼是臨時密碼，當使用者用臨時密碼登入時，系統會要求使用者更新密碼。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E8%80%85%E8%A6%81%E9%80%B2%E5%85%A5-GitLab-%E6%99%82%EF%BC%8C%E5%8F%AF%E4%BB%A5%E8%BC%B8%E5%85%A5-Username-%E6%88%96%E6%98%AF-Email-%E9%83%BD%E5%8F%AF%E4%BB%A5%E3%80%82"><span class="nav-number">12.0.2.</span> <span class="nav-text">使用者要進入 GitLab 時，可以輸入 Username 或是 Email 都可以。</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%A8%AD%E5%AE%9A-ssh-key"><span class="nav-number">13.</span> <span class="nav-text">設定 ssh key</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E6%98%AF%E5%90%A6%E6%9C%89-ssh"><span class="nav-number">13.1.</span> <span class="nav-text">查看是否有 ssh</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BB%BA-SSH-Key"><span class="nav-number">13.2.</span> <span class="nav-text">建 SSH Key</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8B%E6%8C%87%E4%BB%A4%E9%A1%AF%E7%A4%BASSH-Key"><span class="nav-number">13.3.</span> <span class="nav-text">下指令顯示SSH Key</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B0%87%E5%85%AC%E9%91%B0%E6%94%BE%E5%88%B0-GitLab"><span class="nav-number">13.4.</span> <span class="nav-text">將公鑰放到 GitLab</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B8%AC%E8%A9%A6%E6%98%AF%E5%90%A6%E5%8F%AF%E4%BB%A5%E6%96%B0%E5%A2%9E%E5%B0%88%E6%A1%88"><span class="nav-number">14.</span> <span class="nav-text">測試是否可以新增專案</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%B0%E5%A2%9E%E5%B0%88%E6%A1%88"><span class="nav-number">14.1.</span> <span class="nav-text">新增專案</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B8%AC%E8%A9%A6-git-clone-ssh"><span class="nav-number">14.2.</span> <span class="nav-text">測試 git clone ssh</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B8%AC%E8%A9%A6-git-clone-http"><span class="nav-number">14.3.</span> <span class="nav-text">測試 git clone http</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="黃筱珮"
+      src="/../images/avatar.png">
+  <p class="site-author-name" itemprop="name">黃筱珮</p>
+  <div class="site-description" itemprop="description">不要把我看的太重，因為我贏不了你</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">6</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/oli179" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;oli179" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:huang7179@gmail.com" title="E-Mail → mailto:huang7179@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/yourname" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;yourname" rel="noopener" target="_blank"><i class="fab fa-facebook fa-fw"></i>FB Page</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">黃筱珮</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 強力驅動
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
