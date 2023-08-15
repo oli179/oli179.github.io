@@ -21,20 +21,18 @@
   </script>
 
   <meta property="og:type" content="article">
-<meta property="og:title" content="Mac檔案壓縮加密碼">
-<meta property="og:url" content="https://huang0429.github.io/2023/07/27/Mac%E6%AA%94%E6%A1%88%E5%A3%93%E7%B8%AE%E5%8A%A0%E5%AF%86%E7%A2%BC/index.html">
+<meta property="og:title" content="在Ubuntu安裝Docker">
+<meta property="og:url" content="https://huang0429.github.io/2023/08/15/%E5%9C%A8Ubuntu%E5%AE%89%E8%A3%9DDocker/index.html">
 <meta property="og:site_name" content="天下第一不是我">
 <meta property="og:locale" content="zh_TW">
-<meta property="og:image" content="https://huang0429.github.io/2023/07/27/Mac%E6%AA%94%E6%A1%88%E5%A3%93%E7%B8%AE%E5%8A%A0%E5%AF%86%E7%A2%BC/mk0B0de.jpg">
-<meta property="og:image" content="https://huang0429.github.io/2023/07/27/Mac%E6%AA%94%E6%A1%88%E5%A3%93%E7%B8%AE%E5%8A%A0%E5%AF%86%E7%A2%BC/cxh1isu.jpg">
-<meta property="article:published_time" content="2023-07-27T06:52:17.000Z">
-<meta property="article:modified_time" content="2023-07-27T06:52:17.000Z">
+<meta property="article:published_time" content="2023-08-15T08:04:12.000Z">
+<meta property="article:modified_time" content="2023-08-15T08:04:12.000Z">
 <meta property="article:author" content="黃筱珮">
-<meta property="article:tag" content="檔案壓縮">
+<meta property="article:tag" content="Ubuntu">
+<meta property="article:tag" content="Docker">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://huang0429.github.io/2023/07/27/Mac%E6%AA%94%E6%A1%88%E5%A3%93%E7%B8%AE%E5%8A%A0%E5%AF%86%E7%A2%BC/mk0B0de.jpg">
 
-<link rel="canonical" href="https://huang0429.github.io/2023/07/27/Mac%E6%AA%94%E6%A1%88%E5%A3%93%E7%B8%AE%E5%8A%A0%E5%AF%86%E7%A2%BC/">
+<link rel="canonical" href="https://huang0429.github.io/2023/08/15/%E5%9C%A8Ubuntu%E5%AE%89%E8%A3%9DDocker/">
 
 
 <script id="page-configurations">
@@ -47,7 +45,7 @@
   };
 </script>
 
-  <title>Mac檔案壓縮加密碼 | 天下第一不是我</title>
+  <title>在Ubuntu安裝Docker | 天下第一不是我</title>
   
 
 
@@ -163,7 +161,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
-    <link itemprop="mainEntityOfPage" href="https://huang0429.github.io/2023/07/27/Mac%E6%AA%94%E6%A1%88%E5%A3%93%E7%B8%AE%E5%8A%A0%E5%AF%86%E7%A2%BC/">
+    <link itemprop="mainEntityOfPage" href="https://huang0429.github.io/2023/08/15/%E5%9C%A8Ubuntu%E5%AE%89%E8%A3%9DDocker/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/../images/avatar.png">
@@ -176,7 +174,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Mac檔案壓縮加密碼
+          在Ubuntu安裝Docker
         </h1>
 
         <div class="post-meta">
@@ -186,7 +184,7 @@
               </span>
               <span class="post-meta-item-text">發表於</span>
 
-              <time title="創建時間：2023-07-27 14:52:17" itemprop="dateCreated datePublished" datetime="2023-07-27T14:52:17+08:00">2023-07-27</time>
+              <time title="創建時間：2023-08-15 16:04:12" itemprop="dateCreated datePublished" datetime="2023-08-15T16:04:12+08:00">2023-08-15</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -194,7 +192,11 @@
               </span>
               <span class="post-meta-item-text">分類於</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Mac/" itemprop="url" rel="index"><span itemprop="name">Mac</span></a>
+                  <a href="/categories/Docker/" itemprop="url" rel="index"><span itemprop="name">Docker</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Ubuntu/" itemprop="url" rel="index"><span itemprop="name">Ubuntu</span></a>
                 </span>
             </span>
 
@@ -210,22 +212,31 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="檔案壓縮加密碼（M1）"><a href="#檔案壓縮加密碼（M1）" class="headerlink" title="檔案壓縮加密碼（M1）"></a>檔案壓縮加密碼（M1）</h1><p>一般來說Mac本身有檔案壓縮的功能</p>
-<img src="/2023/07/27/Mac%E6%AA%94%E6%A1%88%E5%A3%93%E7%B8%AE%E5%8A%A0%E5%AF%86%E7%A2%BC/mk0B0de.jpg" class>
+        <h1 id="移除舊版本的Docker"><a href="#移除舊版本的Docker" class="headerlink" title="移除舊版本的Docker"></a>移除舊版本的Docker</h1><p>避免與原先的版本衝突，建議把原本舊安裝過的docker移除掉</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">apt-get</span> remove <span class="token function">docker</span> docker-engine docker.io containerd runc<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<p>但是如果要加上密碼</p>
-<p>就要用終端機去處理</p>
-<img src="/2023/07/27/Mac%E6%AA%94%E6%A1%88%E5%A3%93%E7%B8%AE%E5%8A%A0%E5%AF%86%E7%A2%BC/cxh1isu.jpg" class>
+<p>如果想要進階一點手動去檢查是否完全刪除原本舊有的docker可以直接:</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">rm</span> <span class="token parameter variable">-rf</span> /var/lib/docker
+<span class="token function">sudo</span> <span class="token function">rm</span> <span class="token parameter variable">-rf</span> /var/lib/containerd<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
-<p>先進入要壓縮的檔案的那一層</p>
-<p>範例是放在 Desktop</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">zip</span> <span class="token parameter variable">-er</span> test.zip 編譯紀錄<span class="token punctuation">\</span><span class="token punctuation">(</span>影片<span class="token punctuation">\</span><span class="token punctuation">)</span>/ <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h1 id="使用apt-get安裝"><a href="#使用apt-get安裝" class="headerlink" title="使用apt-get安裝"></a>使用apt-get安裝</h1><h2 id="設定repository"><a href="#設定repository" class="headerlink" title="設定repository"></a>設定repository</h2><h3 id="更新apt安裝包以及apt所需的相關套件"><a href="#更新apt安裝包以及apt所需的相關套件" class="headerlink" title="更新apt安裝包以及apt所需的相關套件"></a>更新apt安裝包以及apt所需的相關套件</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">apt-get</span> update
 
-<p>zip 是抬頭</p>
-<p>-er 是加入密碼</p>
-<p>test.zip 是檔案壓縮後叫什麼名字</p>
-<p>編譯紀錄(影片) 這是要壓縮的檔案名稱</p>
-<p>&#x2F; 表示資料夾</p>
+<span class="token function">sudo</span> <span class="token function">apt-get</span> <span class="token function">install</span> ca-certificates <span class="token function">curl</span> gnupg lsb-release<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="加入docker的官方GPG-Key"><a href="#加入docker的官方GPG-Key" class="headerlink" title="加入docker的官方GPG Key"></a>加入docker的官方GPG Key</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">mkdir</span> <span class="token parameter variable">-p</span> /etc/apt/keyrings
+<span class="token function">curl</span> <span class="token parameter variable">-fsSL</span> https://download.docker.com/linux/ubuntu/gpg <span class="token operator">|</span> <span class="token function">sudo</span> gpg <span class="token parameter variable">--dearmor</span> <span class="token parameter variable">-o</span> /etc/apt/keyrings/docker.gpg<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<h3 id="Set-up-the-repository"><a href="#Set-up-the-repository" class="headerlink" title="Set up the repository"></a>Set up the repository</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">echo</span> <span class="token punctuation">\</span>
+  <span class="token string">"deb [arch=<span class="token variable"><span class="token variable">$(</span>dpkg --print-architecture<span class="token variable">)</span></span> signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
+  <span class="token variable"><span class="token variable">$(</span>lsb_release <span class="token parameter variable">-cs</span><span class="token variable">)</span></span> stable"</span> <span class="token operator">|</span> <span class="token function">sudo</span> <span class="token function">tee</span> /etc/apt/sources.list.d/docker.list <span class="token operator">></span> /dev/null
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<h1 id="安裝Docker-Engine"><a href="#安裝Docker-Engine" class="headerlink" title="安裝Docker Engine"></a>安裝Docker Engine</h1><h2 id="apt更新以確保可以安裝最新的docker，並進行安裝"><a href="#apt更新以確保可以安裝最新的docker，並進行安裝" class="headerlink" title="apt更新以確保可以安裝最新的docker，並進行安裝:"></a>apt更新以確保可以安裝最新的docker，並進行安裝:</h2><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">apt-get</span> update
+<span class="token function">sudo</span> <span class="token function">apt-get</span> <span class="token function">install</span> docker-ce docker-ce-cli containerd.io docker-compose-plugin<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<h2 id="確認是否安裝成功"><a href="#確認是否安裝成功" class="headerlink" title="確認是否安裝成功"></a>確認是否安裝成功</h2><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">docker</span> run hello-world<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>如果看到畫面沒有錯誤而且出現Hello world就表示你的docker已經成功安裝在你的Ubuntu上面了</p>
 
     </div>
 
@@ -235,7 +246,8 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/%E6%AA%94%E6%A1%88%E5%A3%93%E7%B8%AE/" rel="tag"># 檔案壓縮</a>
+              <a href="/tags/Ubuntu/" rel="tag"># Ubuntu</a>
+              <a href="/tags/Docker/" rel="tag"># Docker</a>
           </div>
 
         
@@ -243,11 +255,11 @@
 
         
     <div class="post-nav">
-      <div class="post-nav-item"></div>
       <div class="post-nav-item">
-    <a href="/2023/07/27/iOS%E5%A4%9A%E5%9C%8B%E8%AA%9E%E8%A8%80%E7%B3%BB%E7%B5%B1/" rel="next" title="iOS多國語言系統">
-      iOS多國語言系統 <i class="fa fa-chevron-right"></i>
+    <a href="/2023/07/28/%E3%80%90VM%E3%80%91windows-server-2019-%E5%AE%89%E8%A3%9D-Docker-%E4%B8%A6%E6%9E%B6%E8%A8%AD-Gitlab/" rel="prev" title="【VM】windows server 2019 安裝 Docker 並架設 Gitlab">
+      <i class="fa fa-chevron-left"></i> 【VM】windows server 2019 安裝 Docker 並架設 Gitlab
     </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -306,7 +318,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%AA%94%E6%A1%88%E5%A3%93%E7%B8%AE%E5%8A%A0%E5%AF%86%E7%A2%BC%EF%BC%88M1%EF%BC%89"><span class="nav-number">1.</span> <span class="nav-text">檔案壓縮加密碼（M1）</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%A7%BB%E9%99%A4%E8%88%8A%E7%89%88%E6%9C%AC%E7%9A%84Docker"><span class="nav-number">1.</span> <span class="nav-text">移除舊版本的Docker</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8apt-get%E5%AE%89%E8%A3%9D"><span class="nav-number">2.</span> <span class="nav-text">使用apt-get安裝</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A8%AD%E5%AE%9Arepository"><span class="nav-number">2.1.</span> <span class="nav-text">設定repository</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9B%B4%E6%96%B0apt%E5%AE%89%E8%A3%9D%E5%8C%85%E4%BB%A5%E5%8F%8Aapt%E6%89%80%E9%9C%80%E7%9A%84%E7%9B%B8%E9%97%9C%E5%A5%97%E4%BB%B6"><span class="nav-number">2.1.1.</span> <span class="nav-text">更新apt安裝包以及apt所需的相關套件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8A%A0%E5%85%A5docker%E7%9A%84%E5%AE%98%E6%96%B9GPG-Key"><span class="nav-number">2.1.2.</span> <span class="nav-text">加入docker的官方GPG Key</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Set-up-the-repository"><span class="nav-number">2.1.3.</span> <span class="nav-text">Set up the repository</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%89%E8%A3%9DDocker-Engine"><span class="nav-number">3.</span> <span class="nav-text">安裝Docker Engine</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#apt%E6%9B%B4%E6%96%B0%E4%BB%A5%E7%A2%BA%E4%BF%9D%E5%8F%AF%E4%BB%A5%E5%AE%89%E8%A3%9D%E6%9C%80%E6%96%B0%E7%9A%84docker%EF%BC%8C%E4%B8%A6%E9%80%B2%E8%A1%8C%E5%AE%89%E8%A3%9D"><span class="nav-number">3.1.</span> <span class="nav-text">apt更新以確保可以安裝最新的docker，並進行安裝:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A2%BA%E8%AA%8D%E6%98%AF%E5%90%A6%E5%AE%89%E8%A3%9D%E6%88%90%E5%8A%9F"><span class="nav-number">3.2.</span> <span class="nav-text">確認是否安裝成功</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
