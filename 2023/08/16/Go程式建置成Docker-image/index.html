@@ -197,11 +197,11 @@
               </span>
               <span class="post-meta-item-text">分類於</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Docker/" itemprop="url" rel="index"><span itemprop="name">Docker</span></a>
+                  <a href="/categories/Go/" itemprop="url" rel="index"><span itemprop="name">Go</span></a>
                 </span>
                   ，
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Go/" itemprop="url" rel="index"><span itemprop="name">Go</span></a>
+                  <a href="/categories/Docker/" itemprop="url" rel="index"><span itemprop="name">Docker</span></a>
                 </span>
             </span>
 
@@ -220,29 +220,25 @@
         <h1 id="進入Go程式裡"><a href="#進入Go程式裡" class="headerlink" title="進入Go程式裡"></a>進入Go程式裡</h1><img src="/2023/08/16/Go%E7%A8%8B%E5%BC%8F%E5%BB%BA%E7%BD%AE%E6%88%90Docker-image/1.png" class>
 
 <h1 id="新增-Dockerfile"><a href="#新增-Dockerfile" class="headerlink" title="新增 Dockerfile"></a>新增 Dockerfile</h1><p>內容如下:</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># syntax=docker/dockerfile:1</span>
-FROM golang:1.18.0-alpine
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">FROM ubuntu:latest
 
-<span class="token comment"># 安裝Git.此環境不會繼承本機環境,所以要安裝Git.</span>
-RUN apk update <span class="token operator">&amp;&amp;</span> apk <span class="token function">add</span> --no-cache <span class="token function">git</span>
+WORKDIR /
 
-<span class="token comment"># 設置工作目錄</span>
+RUN <span class="token function">mkdir</span> RCSPPC
+
+RUN <span class="token function">mkdir</span> Cert
+
+RUN <span class="token function">mkdir</span> Conf
+
 WORKDIR /RCSPPC
 
-<span class="token comment"># 複製代碼到容器中</span>
-COPY <span class="token builtin class-name">.</span> <span class="token builtin class-name">.</span>
+<span class="token comment">#COPY RCSPPC ecc_key.pem ecc_cert.pem config.yaml .</span>
 
-<span class="token comment"># 下載並安裝依賴項</span>
-RUN go mod download
+COPY RCSPPC <span class="token builtin class-name">.</span>
 
-<span class="token comment"># 設定容器要監聽端口</span>
 EXPOSE <span class="token number">9999</span>
 
-<span class="token comment"># 編譯應用程序</span>
-RUN go build <span class="token parameter variable">-o</span> RCSPPC <span class="token builtin class-name">.</span>
-
-<span class="token comment"># 定義容器運行時的命令</span>
-CMD <span class="token punctuation">[</span><span class="token string">"./RCSPPC"</span><span class="token punctuation">]</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+CMD <span class="token punctuation">[</span><span class="token string">"./RCSPPC"</span><span class="token punctuation">]</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h1 id="利用指令建置Docker-image"><a href="#利用指令建置Docker-image" class="headerlink" title="利用指令建置Docker image"></a>利用指令建置Docker image</h1><p>將指令位置移到跟 Go 程式同一層</p>
 <img src="/2023/08/16/Go%E7%A8%8B%E5%BC%8F%E5%BB%BA%E7%BD%AE%E6%88%90Docker-image/2.png" class>
