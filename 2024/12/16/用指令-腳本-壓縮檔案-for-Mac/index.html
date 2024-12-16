@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-16x16-next.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-32x32-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"huang0429.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta property="og:type" content="article">
+<meta property="og:title" content="用指令(腳本)壓縮檔案 for Mac">
+<meta property="og:url" content="https://huang0429.github.io/2024/12/16/%E7%94%A8%E6%8C%87%E4%BB%A4-%E8%85%B3%E6%9C%AC-%E5%A3%93%E7%B8%AE%E6%AA%94%E6%A1%88-for-Mac/index.html">
+<meta property="og:site_name" content="天下第一不是我">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://huang0429.github.io/2024/12/16/%E7%94%A8%E6%8C%87%E4%BB%A4-%E8%85%B3%E6%9C%AC-%E5%A3%93%E7%B8%AE%E6%AA%94%E6%A1%88-for-Mac/1.jpg">
+<meta property="article:published_time" content="2024-12-16T03:43:11.000Z">
+<meta property="article:modified_time" content="2024-12-16T03:43:11.000Z">
+<meta property="article:author" content="黃筱珮">
+<meta property="article:tag" content="Mac">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://huang0429.github.io/2024/12/16/%E7%94%A8%E6%8C%87%E4%BB%A4-%E8%85%B3%E6%9C%AC-%E5%A3%93%E7%B8%AE%E6%AA%94%E6%A1%88-for-Mac/1.jpg">
+
+<link rel="canonical" href="https://huang0429.github.io/2024/12/16/%E7%94%A8%E6%8C%87%E4%BB%A4-%E8%85%B3%E6%9C%AC-%E5%A3%93%E7%B8%AE%E6%AA%94%E6%A1%88-for-Mac/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-TW'
+  };
+</script>
+
+  <title>用指令(腳本)壓縮檔案 for Mac | 天下第一不是我</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">天下第一不是我</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">我學的很快樂</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤<span class="badge">11</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類<span class="badge">9</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔<span class="badge">10</span></a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://huang0429.github.io/2024/12/16/%E7%94%A8%E6%8C%87%E4%BB%A4-%E8%85%B3%E6%9C%AC-%E5%A3%93%E7%B8%AE%E6%AA%94%E6%A1%88-for-Mac/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/../images/avatar.png">
+      <meta itemprop="name" content="黃筱珮">
+      <meta itemprop="description" content="不要把我看的太重，因為我贏不了你">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="天下第一不是我">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          用指令(腳本)壓縮檔案 for Mac
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2024-12-16 11:43:11" itemprop="dateCreated datePublished" datetime="2024-12-16T11:43:11+08:00">2024-12-16</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%B7%A5%E5%85%B7/" itemprop="url" rel="index"><span itemprop="name">工具</span></a>
+                </span>
+            </span>
+
+          
+            <div class="post-description"> </div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>三種方式：</p>
+<ol>
+<li>無密碼</li>
+<li>有密碼</li>
+<li>有密碼（亂數密碼）</li>
+</ol>
+<h2 id="1-無密碼"><a href="#1-無密碼" class="headerlink" title="1.無密碼"></a>1.無密碼</h2><p>終端機指令：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">zip</span> <span class="token parameter variable">-r</span> SecuComp.zip 檔案<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p><code>-r</code> 壓縮的意思<br><code>SecuComp.zip</code> 是壓縮後的名稱<br><code>檔案</code> 是要壓縮的檔案名稱</p>
+<h2 id="2-有密碼"><a href="#2-有密碼" class="headerlink" title="2.有密碼"></a>2.有密碼</h2><p>終端機指令：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">zip</span> <span class="token parameter variable">-er</span> SecuComp.zip /Users/Desktop/已完成公證<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p><code>e</code> 加上密碼<br><code>-r</code> 壓縮的意思<br><code>SecuComp.zip</code> 是壓縮後的名稱<br><code>已完成公證</code> 是要壓縮的檔案名稱</p>
+<img src="/2024/12/16/%E7%94%A8%E6%8C%87%E4%BB%A4-%E8%85%B3%E6%9C%AC-%E5%A3%93%E7%B8%AE%E6%AA%94%E6%A1%88-for-Mac/1.jpg" class>
+<p>指令輸入並按下enter之後會要求輸入二次密碼</p>
+<h2 id="3-有密碼（亂數密碼）"><a href="#3-有密碼（亂數密碼）" class="headerlink" title="3.有密碼（亂數密碼）"></a>3.有密碼（亂數密碼）</h2><p>這種方式要用寫腳本的方式進行</p>
+<h3 id="腳本"><a href="#腳本" class="headerlink" title="腳本"></a>腳本</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token shebang important">#!/bin/bash</span>
+
+<span class="token comment"># 檢查是否提供輸入檔案路徑參數</span>
+<span class="token keyword">if</span> <span class="token punctuation">[</span> <span class="token parameter variable">-z</span> <span class="token string">"<span class="token variable">$1</span>"</span> <span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">then</span>
+  <span class="token builtin class-name">echo</span> <span class="token string">"Usage: <span class="token variable">$0</span> &lt;file_or_directory_to_compress> [output_zip_path]"</span>
+  <span class="token builtin class-name">exit</span> <span class="token number">1</span>
+<span class="token keyword">fi</span>
+
+<span class="token comment"># 取得輸入的檔案或目錄路徑</span>
+<span class="token assign-left variable">input_path</span><span class="token operator">=</span><span class="token variable">$1</span>
+
+<span class="token comment"># 檢查檔案或資料夾是否存在</span>
+<span class="token keyword">if</span> <span class="token punctuation">[</span> <span class="token operator">!</span> <span class="token parameter variable">-e</span> <span class="token string">"<span class="token variable">$input_path</span>"</span> <span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">then</span>
+  <span class="token builtin class-name">echo</span> <span class="token string">"Error: File or directory '<span class="token variable">$input_path</span>' does not exist."</span>
+  <span class="token builtin class-name">exit</span> <span class="token number">1</span>
+<span class="token keyword">fi</span>
+
+<span class="token comment"># 取得輸出的壓縮檔案路徑，若未提供，使用預設名稱 output.zip</span>
+<span class="token assign-left variable">output_path</span><span class="token operator">=</span><span class="token variable">$&#123;2<span class="token operator">:-</span>output.zip&#125;</span>
+
+<span class="token comment"># 生成隨機密碼</span>
+<span class="token assign-left variable">password</span><span class="token operator">=</span><span class="token variable"><span class="token variable">$(</span>openssl rand <span class="token parameter variable">-base64</span> <span class="token number">6</span><span class="token variable">)</span></span>
+<span class="token builtin class-name">echo</span> <span class="token string">"Generated password: <span class="token variable">$password</span>"</span>
+
+<span class="token comment"># 進入輸入路徑的父目錄</span>
+<span class="token builtin class-name">cd</span> <span class="token string">"<span class="token variable"><span class="token variable">$(</span><span class="token function">dirname</span> <span class="token string">"<span class="token variable">$input_path</span>"</span><span class="token variable">)</span></span>"</span>
+
+<span class="token comment"># 壓縮並加密目錄或檔案（僅包含目標的名稱而非完整路徑）</span>
+<span class="token function">zip</span> <span class="token parameter variable">-P</span> <span class="token string">"<span class="token variable">$password</span>"</span> <span class="token parameter variable">-r</span> <span class="token string">"<span class="token variable">$output_path</span>"</span> <span class="token string">"<span class="token variable"><span class="token variable">$(</span><span class="token function">basename</span> <span class="token string">"<span class="token variable">$input_path</span>"</span><span class="token variable">)</span></span>"</span>
+
+<span class="token comment"># 提示壓縮結果</span>
+<span class="token keyword">if</span> <span class="token punctuation">[</span> <span class="token variable">$?</span> <span class="token parameter variable">-eq</span> <span class="token number">0</span> <span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">then</span>
+  <span class="token builtin class-name">echo</span> <span class="token string">"Successfully compressed '<span class="token variable">$input_path</span>' into '<span class="token variable">$output_path</span>'"</span>
+  <span class="token builtin class-name">echo</span> <span class="token string">"Password: <span class="token variable">$password</span>"</span>
+<span class="token keyword">else</span>
+  <span class="token builtin class-name">echo</span> <span class="token string">"Error: Failed to compress the file or directory."</span>
+<span class="token keyword">fi</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>重點：</p>
+<ol>
+<li>亂數密碼為六碼</li>
+<li>如果沒有提供輸出名稱，預設為output.zip</li>
+</ol>
+<h3 id="給權限"><a href="#給權限" class="headerlink" title="給權限"></a>給權限</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">chmod</span> +x compress_with_password.sh<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>如果執行結果為找不到compress_with_password.sh就改寫完整的路徑</p>
+<h3 id="執行壓縮作業"><a href="#執行壓縮作業" class="headerlink" title="執行壓縮作業"></a>執行壓縮作業</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">//.sh檔案放哪裡，就在哪裡執行
+<span class="token builtin class-name">cd</span> /Users/Downloads
+
+./compress_with_password.sh /Users/olit/Desktop/xxxx /Users/zzz/abc.zip<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Mac/" rel="tag"># Mac</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2024/01/31/%E4%B8%80%E5%8F%B0%E9%9B%BB%E8%85%A6%E5%85%A9%E5%80%8BGitHub%E5%B8%B3%E6%88%B6/" rel="prev" title="一台電腦兩個GitHub帳戶">
+      <i class="fa fa-chevron-left"></i> 一台電腦兩個GitHub帳戶
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E7%84%A1%E5%AF%86%E7%A2%BC"><span class="nav-number">1.</span> <span class="nav-text">1.無密碼</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E6%9C%89%E5%AF%86%E7%A2%BC"><span class="nav-number">2.</span> <span class="nav-text">2.有密碼</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E6%9C%89%E5%AF%86%E7%A2%BC%EF%BC%88%E4%BA%82%E6%95%B8%E5%AF%86%E7%A2%BC%EF%BC%89"><span class="nav-number">3.</span> <span class="nav-text">3.有密碼（亂數密碼）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%85%B3%E6%9C%AC"><span class="nav-number">3.1.</span> <span class="nav-text">腳本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B5%A6%E6%AC%8A%E9%99%90"><span class="nav-number">3.2.</span> <span class="nav-text">給權限</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%B7%E8%A1%8C%E5%A3%93%E7%B8%AE%E4%BD%9C%E6%A5%AD"><span class="nav-number">3.3.</span> <span class="nav-text">執行壓縮作業</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="黃筱珮"
+      src="/../images/avatar.png">
+  <p class="site-author-name" itemprop="name">黃筱珮</p>
+  <div class="site-description" itemprop="description">不要把我看的太重，因為我贏不了你</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">10</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/oli179" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;oli179" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:huang7179@gmail.com" title="E-Mail → mailto:huang7179@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/yourname" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;yourname" rel="noopener" target="_blank"><i class="fab fa-facebook fa-fw"></i>FB Page</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">黃筱珮</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 強力驅動
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
