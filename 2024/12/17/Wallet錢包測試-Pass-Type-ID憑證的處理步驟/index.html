@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-16x16-next.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-32x32-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"huang0429.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="Wallet錢包測試系列">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Wallet錢包測試-Pass Type ID憑證的處理步驟">
+<meta property="og:url" content="https://huang0429.github.io/2024/12/17/Wallet%E9%8C%A2%E5%8C%85%E6%B8%AC%E8%A9%A6-Pass-Type-ID%E6%86%91%E8%AD%89%E7%9A%84%E8%99%95%E7%90%86%E6%AD%A5%E9%A9%9F/index.html">
+<meta property="og:site_name" content="天下第一不是我">
+<meta property="og:description" content="Wallet錢包測試系列">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://huang0429.github.io/2024/12/17/Wallet%E9%8C%A2%E5%8C%85%E6%B8%AC%E8%A9%A6-Pass-Type-ID%E6%86%91%E8%AD%89%E7%9A%84%E8%99%95%E7%90%86%E6%AD%A5%E9%A9%9F/Oli-20241209-160323.jpg">
+<meta property="og:image" content="https://huang0429.github.io/2024/12/17/Wallet%E9%8C%A2%E5%8C%85%E6%B8%AC%E8%A9%A6-Pass-Type-ID%E6%86%91%E8%AD%89%E7%9A%84%E8%99%95%E7%90%86%E6%AD%A5%E9%A9%9F/Oli-20241217-110427.jpg">
+<meta property="og:image" content="https://huang0429.github.io/2024/12/17/Wallet%E9%8C%A2%E5%8C%85%E6%B8%AC%E8%A9%A6-Pass-Type-ID%E6%86%91%E8%AD%89%E7%9A%84%E8%99%95%E7%90%86%E6%AD%A5%E9%A9%9F/Oli-20241217-113808.jpg">
+<meta property="og:image" content="https://huang0429.github.io/2024/12/17/Wallet%E9%8C%A2%E5%8C%85%E6%B8%AC%E8%A9%A6-Pass-Type-ID%E6%86%91%E8%AD%89%E7%9A%84%E8%99%95%E7%90%86%E6%AD%A5%E9%A9%9F/Oli-20241217-111737.jpg">
+<meta property="og:image" content="https://huang0429.github.io/2024/12/17/Wallet%E9%8C%A2%E5%8C%85%E6%B8%AC%E8%A9%A6-Pass-Type-ID%E6%86%91%E8%AD%89%E7%9A%84%E8%99%95%E7%90%86%E6%AD%A5%E9%A9%9F/Oli-20241216-190948.jpg">
+<meta property="article:published_time" content="2024-12-17T05:23:27.000Z">
+<meta property="article:modified_time" content="2024-12-17T05:23:27.000Z">
+<meta property="article:author" content="黃筱珮">
+<meta property="article:tag" content="Wallet">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://huang0429.github.io/2024/12/17/Wallet%E9%8C%A2%E5%8C%85%E6%B8%AC%E8%A9%A6-Pass-Type-ID%E6%86%91%E8%AD%89%E7%9A%84%E8%99%95%E7%90%86%E6%AD%A5%E9%A9%9F/Oli-20241209-160323.jpg">
+
+<link rel="canonical" href="https://huang0429.github.io/2024/12/17/Wallet%E9%8C%A2%E5%8C%85%E6%B8%AC%E8%A9%A6-Pass-Type-ID%E6%86%91%E8%AD%89%E7%9A%84%E8%99%95%E7%90%86%E6%AD%A5%E9%A9%9F/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-TW'
+  };
+</script>
+
+  <title>Wallet錢包測試-Pass Type ID憑證的處理步驟 | 天下第一不是我</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">天下第一不是我</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">我學的很快樂</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤<span class="badge">13</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類<span class="badge">11</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔<span class="badge">13</span></a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://huang0429.github.io/2024/12/17/Wallet%E9%8C%A2%E5%8C%85%E6%B8%AC%E8%A9%A6-Pass-Type-ID%E6%86%91%E8%AD%89%E7%9A%84%E8%99%95%E7%90%86%E6%AD%A5%E9%A9%9F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/../images/avatar.png">
+      <meta itemprop="name" content="黃筱珮">
+      <meta itemprop="description" content="不要把我看的太重，因為我贏不了你">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="天下第一不是我">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Wallet錢包測試-Pass Type ID憑證的處理步驟
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2024-12-17 13:23:27" itemprop="dateCreated datePublished" datetime="2024-12-17T13:23:27+08:00">2024-12-17</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Wallet/" itemprop="url" rel="index"><span itemprop="name">Wallet</span></a>
+                </span>
+            </span>
+
+          
+            <div class="post-description"> Wallet錢包測試系列 </div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="Wallet錢包測試-Pass-Type-ID憑證的處理步驟"><a href="#Wallet錢包測試-Pass-Type-ID憑證的處理步驟" class="headerlink" title="Wallet錢包測試-Pass Type ID憑證的處理步驟"></a>Wallet錢包測試-Pass Type ID憑證的處理步驟</h1><h2 id="安裝-pass-cer"><a href="#安裝-pass-cer" class="headerlink" title="安裝 pass.cer"></a>安裝 pass.cer</h2><p>雙擊下載的 pass.cer 文件，將其安裝到 macOS 的 Keychain Access（鑰匙圈）。<br>可以在 “我的憑證” 或 “系統” 鑰匙圈中看到該憑證。</p>
+<img src="/2024/12/17/Wallet%E9%8C%A2%E5%8C%85%E6%B8%AC%E8%A9%A6-Pass-Type-ID%E6%86%91%E8%AD%89%E7%9A%84%E8%99%95%E7%90%86%E6%AD%A5%E9%A9%9F/Oli-20241209-160323.jpg" class title="Oli-20241209-160323">
+<blockquote>
+<p>❌ 在這裡遇到問題，一開始下載的pass.cer不含私鑰，後來安裝了WWDR-G4憑證就成功了。<br>在<code>Certificates, Identifiers &amp; Profiles</code>新增憑證時，下方會有可以下載WWDR-G4的連結。</p>
+</blockquote>
+<img src="/2024/12/17/Wallet%E9%8C%A2%E5%8C%85%E6%B8%AC%E8%A9%A6-Pass-Type-ID%E6%86%91%E8%AD%89%E7%9A%84%E8%99%95%E7%90%86%E6%AD%A5%E9%A9%9F/Oli-20241217-110427.jpg" class title="Oli-20241217-110427">
+
+<img src="/2024/12/17/Wallet%E9%8C%A2%E5%8C%85%E6%B8%AC%E8%A9%A6-Pass-Type-ID%E6%86%91%E8%AD%89%E7%9A%84%E8%99%95%E7%90%86%E6%AD%A5%E9%A9%9F/Oli-20241217-113808.jpg" class title="Oli-20241217-113808">
+
+
+<h2 id="匯出-p12-檔案"><a href="#匯出-p12-檔案" class="headerlink" title="匯出 .p12 檔案"></a>匯出 .p12 檔案</h2><p>為了在命令行工具或其他應用中使用憑證，需要將憑證和私鑰匯出為 .p12 文件，然後再轉成.pem。</p>
+<blockquote>
+<p>❌ 在驗證憑證時發生了錯誤： </p>
+</blockquote>
+<img src="/2024/12/17/Wallet%E9%8C%A2%E5%8C%85%E6%B8%AC%E8%A9%A6-Pass-Type-ID%E6%86%91%E8%AD%89%E7%9A%84%E8%99%95%E7%90%86%E6%AD%A5%E9%A9%9F/Oli-20241217-111737.jpg" class title="Oli-20241217-111737">
+
+<p>其中 error 2…意指缺少必要的中間 CA 憑證，導致 Apple 的 WWDR 憑證無法驗證，需要下載 Apple Root CA - G3 憑證（.pem 格式），載點：<a target="_blank" rel="noopener" href="https://www.apple.com/certificateauthority/">https://www.apple.com/certificateauthority/</a></p>
+<h2 id="將憑證匯出為-pem"><a href="#將憑證匯出為-pem" class="headerlink" title="將憑證匯出為.pem"></a>將憑證匯出為.pem</h2><p>網路上有可以用指令可以將.p12轉成.pem，但是試了幾個，都無法成功轉成.pem，最後試了一個，但是有需要手動存檔。（機器人的方式也是跟網路一樣…不行）。</p>
+<h3 id="💦-步驟1-先在keyChain將Pass-Type-ID憑證匯出為pass-p12，然後用指令執行："><a href="#💦-步驟1-先在keyChain將Pass-Type-ID憑證匯出為pass-p12，然後用指令執行：" class="headerlink" title="💦 步驟1. 先在keyChain將Pass Type ID憑證匯出為pass.p12，然後用指令執行："></a>💦 步驟1. 先在keyChain將Pass Type ID憑證匯出為pass.p12，然後用指令執行：</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">openssl pkcs12 <span class="token parameter variable">-in</span> pass.p12 <span class="token parameter variable">-legacy</span> <span class="token parameter variable">-nodes</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>如果成功會出現一大串的文字，裡面包含了憑證跟私鑰。</p>
+<h3 id="💦-步驟2-分別單獨保存憑證與私密金鑰"><a href="#💦-步驟2-分別單獨保存憑證與私密金鑰" class="headerlink" title="💦 步驟2. 分別單獨保存憑證與私密金鑰"></a>💦 步驟2. 分別單獨保存憑證與私密金鑰</h3><p><strong>用文字編輯器分別保存：</strong>  </p>
+<ul>
+<li>保存憑證：<br>將 —–BEGIN CERTIFICATE—– 到 —–END CERTIFICATE—– 的內容複製到 certificate.pem 文件中。  </li>
+<li>保存私密金鑰：<br>將 —–BEGIN PRIVATE KEY—– 到 —–END PRIVATE KEY—– 的內容複製到 privateKey.pem 文件中。</li>
+</ul>
+<h3 id="💦-步驟3-測試-pem-文件是否有效"><a href="#💦-步驟3-測試-pem-文件是否有效" class="headerlink" title="💦 步驟3. 測試 .pem 文件是否有效"></a>💦 步驟3. 測試 .pem 文件是否有效</h3><p>用指令驗證私密金鑰是否有效：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">openssl rsa <span class="token parameter variable">-in</span> privateKey.pem <span class="token parameter variable">-check</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>驗證憑證是否有效：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">openssl x509 <span class="token parameter variable">-in</span> certificate.pem <span class="token parameter variable">-text</span> <span class="token parameter variable">-noout</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>驗證私密金鑰與憑證是否匹配：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">openssl x509 <span class="token parameter variable">-noout</span> <span class="token parameter variable">-modulus</span> <span class="token parameter variable">-in</span> certificate.pem <span class="token operator">|</span> openssl md5
+openssl rsa <span class="token parameter variable">-noout</span> <span class="token parameter variable">-modulus</span> <span class="token parameter variable">-in</span> privateKey.pem <span class="token operator">|</span> openssl md5<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>兩個命令的輸出結果應相同，表示私密金鑰與憑證是匹配的。</p>
+<img src="/2024/12/17/Wallet%E9%8C%A2%E5%8C%85%E6%B8%AC%E8%A9%A6-Pass-Type-ID%E6%86%91%E8%AD%89%E7%9A%84%E8%99%95%E7%90%86%E6%AD%A5%E9%A9%9F/Oli-20241216-190948.jpg" class title="Oli-20241216-190948">
+
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Wallet/" rel="tag"># Wallet</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2024/12/17/Wallet%E9%96%8B%E7%99%BC-Wallet%E5%9C%96%E7%89%87%E9%99%90%E5%88%B6/" rel="prev" title="Wallet開發-Wallet圖片限制">
+      <i class="fa fa-chevron-left"></i> Wallet開發-Wallet圖片限制
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Wallet%E9%8C%A2%E5%8C%85%E6%B8%AC%E8%A9%A6-Pass-Type-ID%E6%86%91%E8%AD%89%E7%9A%84%E8%99%95%E7%90%86%E6%AD%A5%E9%A9%9F"><span class="nav-number">1.</span> <span class="nav-text">Wallet錢包測試-Pass Type ID憑證的處理步驟</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%9D-pass-cer"><span class="nav-number">1.1.</span> <span class="nav-text">安裝 pass.cer</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8C%AF%E5%87%BA-p12-%E6%AA%94%E6%A1%88"><span class="nav-number">1.2.</span> <span class="nav-text">匯出 .p12 檔案</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B0%87%E6%86%91%E8%AD%89%E5%8C%AF%E5%87%BA%E7%82%BA-pem"><span class="nav-number">1.3.</span> <span class="nav-text">將憑證匯出為.pem</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%92%A6-%E6%AD%A5%E9%A9%9F1-%E5%85%88%E5%9C%A8keyChain%E5%B0%87Pass-Type-ID%E6%86%91%E8%AD%89%E5%8C%AF%E5%87%BA%E7%82%BApass-p12%EF%BC%8C%E7%84%B6%E5%BE%8C%E7%94%A8%E6%8C%87%E4%BB%A4%E5%9F%B7%E8%A1%8C%EF%BC%9A"><span class="nav-number">1.3.1.</span> <span class="nav-text">💦 步驟1. 先在keyChain將Pass Type ID憑證匯出為pass.p12，然後用指令執行：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%92%A6-%E6%AD%A5%E9%A9%9F2-%E5%88%86%E5%88%A5%E5%96%AE%E7%8D%A8%E4%BF%9D%E5%AD%98%E6%86%91%E8%AD%89%E8%88%87%E7%A7%81%E5%AF%86%E9%87%91%E9%91%B0"><span class="nav-number">1.3.2.</span> <span class="nav-text">💦 步驟2. 分別單獨保存憑證與私密金鑰</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%92%A6-%E6%AD%A5%E9%A9%9F3-%E6%B8%AC%E8%A9%A6-pem-%E6%96%87%E4%BB%B6%E6%98%AF%E5%90%A6%E6%9C%89%E6%95%88"><span class="nav-number">1.3.3.</span> <span class="nav-text">💦 步驟3. 測試 .pem 文件是否有效</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="黃筱珮"
+      src="/../images/avatar.png">
+  <p class="site-author-name" itemprop="name">黃筱珮</p>
+  <div class="site-description" itemprop="description">不要把我看的太重，因為我贏不了你</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">13</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/oli179" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;oli179" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:huang7179@gmail.com" title="E-Mail → mailto:huang7179@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/yourname" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;yourname" rel="noopener" target="_blank"><i class="fab fa-facebook fa-fw"></i>FB Page</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">黃筱珮</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 強力驅動
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
