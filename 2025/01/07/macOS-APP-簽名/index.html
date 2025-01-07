@@ -21,23 +21,19 @@
   </script>
 
   <meta property="og:type" content="article">
-<meta property="og:title" content="APP開發時支援雙架構要修改的地方">
-<meta property="og:url" content="https://huang0429.github.io/2024/12/16/APP%E9%96%8B%E7%99%BC%E6%99%82%E6%94%AF%E6%8F%B4%E9%9B%99%E6%9E%B6%E6%A7%8B%E8%A6%81%E4%BF%AE%E6%94%B9%E7%9A%84%E5%9C%B0%E6%96%B9/index.html">
+<meta property="og:title" content="macOS APP 簽名">
+<meta property="og:url" content="https://huang0429.github.io/2025/01/07/macOS-APP-%E7%B0%BD%E5%90%8D/index.html">
 <meta property="og:site_name" content="天下第一不是我">
 <meta property="og:locale" content="zh_TW">
-<meta property="og:image" content="https://huang0429.github.io/2024/12/16/APP%E9%96%8B%E7%99%BC%E6%99%82%E6%94%AF%E6%8F%B4%E9%9B%99%E6%9E%B6%E6%A7%8B%E8%A6%81%E4%BF%AE%E6%94%B9%E7%9A%84%E5%9C%B0%E6%96%B9/Oli-20241118-143744.jpg">
-<meta property="og:image" content="https://huang0429.github.io/2024/12/16/APP%E9%96%8B%E7%99%BC%E6%99%82%E6%94%AF%E6%8F%B4%E9%9B%99%E6%9E%B6%E6%A7%8B%E8%A6%81%E4%BF%AE%E6%94%B9%E7%9A%84%E5%9C%B0%E6%96%B9/Oli-20241118-144800.jpg">
-<meta property="og:image" content="https://huang0429.github.io/2024/12/16/APP%E9%96%8B%E7%99%BC%E6%99%82%E6%94%AF%E6%8F%B4%E9%9B%99%E6%9E%B6%E6%A7%8B%E8%A6%81%E4%BF%AE%E6%94%B9%E7%9A%84%E5%9C%B0%E6%96%B9/Oli-20241118-145454.jpg">
-<meta property="og:image" content="https://huang0429.github.io/2024/12/16/APP%E9%96%8B%E7%99%BC%E6%99%82%E6%94%AF%E6%8F%B4%E9%9B%99%E6%9E%B6%E6%A7%8B%E8%A6%81%E4%BF%AE%E6%94%B9%E7%9A%84%E5%9C%B0%E6%96%B9/Oli-20241118-145811.jpg">
-<meta property="og:image" content="https://huang0429.github.io/2024/12/16/APP%E9%96%8B%E7%99%BC%E6%99%82%E6%94%AF%E6%8F%B4%E9%9B%99%E6%9E%B6%E6%A7%8B%E8%A6%81%E4%BF%AE%E6%94%B9%E7%9A%84%E5%9C%B0%E6%96%B9/Oli-20241118-145920.jpg">
-<meta property="article:published_time" content="2024-12-16T06:37:25.000Z">
-<meta property="article:modified_time" content="2024-12-16T06:37:25.000Z">
+<meta property="og:image" content="https://huang0429.github.io/2025/01/07/macOS-APP-%E7%B0%BD%E5%90%8D/Oli-20241119-153823.jpg">
+<meta property="article:published_time" content="2025-01-07T08:37:38.000Z">
+<meta property="article:modified_time" content="2025-01-07T08:37:38.000Z">
 <meta property="article:author" content="Oli">
-<meta property="article:tag" content="Xcode">
+<meta property="article:tag" content="簽名">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://huang0429.github.io/2024/12/16/APP%E9%96%8B%E7%99%BC%E6%99%82%E6%94%AF%E6%8F%B4%E9%9B%99%E6%9E%B6%E6%A7%8B%E8%A6%81%E4%BF%AE%E6%94%B9%E7%9A%84%E5%9C%B0%E6%96%B9/Oli-20241118-143744.jpg">
+<meta name="twitter:image" content="https://huang0429.github.io/2025/01/07/macOS-APP-%E7%B0%BD%E5%90%8D/Oli-20241119-153823.jpg">
 
-<link rel="canonical" href="https://huang0429.github.io/2024/12/16/APP%E9%96%8B%E7%99%BC%E6%99%82%E6%94%AF%E6%8F%B4%E9%9B%99%E6%9E%B6%E6%A7%8B%E8%A6%81%E4%BF%AE%E6%94%B9%E7%9A%84%E5%9C%B0%E6%96%B9/">
+<link rel="canonical" href="https://huang0429.github.io/2025/01/07/macOS-APP-%E7%B0%BD%E5%90%8D/">
 
 
 <script id="page-configurations">
@@ -50,7 +46,7 @@
   };
 </script>
 
-  <title>APP開發時支援雙架構要修改的地方 | 天下第一不是我</title>
+  <title>macOS APP 簽名 | 天下第一不是我</title>
   
 
 
@@ -166,7 +162,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
-    <link itemprop="mainEntityOfPage" href="https://huang0429.github.io/2024/12/16/APP%E9%96%8B%E7%99%BC%E6%99%82%E6%94%AF%E6%8F%B4%E9%9B%99%E6%9E%B6%E6%A7%8B%E8%A6%81%E4%BF%AE%E6%94%B9%E7%9A%84%E5%9C%B0%E6%96%B9/">
+    <link itemprop="mainEntityOfPage" href="https://huang0429.github.io/2025/01/07/macOS-APP-%E7%B0%BD%E5%90%8D/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/../images/avatar.png">
@@ -179,7 +175,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          APP開發時支援雙架構要修改的地方
+          macOS APP 簽名
         </h1>
 
         <div class="post-meta">
@@ -189,7 +185,7 @@
               </span>
               <span class="post-meta-item-text">發表於</span>
 
-              <time title="創建時間：2024-12-16 14:37:25" itemprop="dateCreated datePublished" datetime="2024-12-16T14:37:25+08:00">2024-12-16</time>
+              <time title="創建時間：2025-01-07 16:37:38" itemprop="dateCreated datePublished" datetime="2025-01-07T16:37:38+08:00">2025-01-07</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -197,7 +193,7 @@
               </span>
               <span class="post-meta-item-text">分類於</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Xcode/" itemprop="url" rel="index"><span itemprop="name">Xcode</span></a>
+                  <a href="/categories/AppleDeveloper/" itemprop="url" rel="index"><span itemprop="name">AppleDeveloper</span></a>
                 </span>
             </span>
 
@@ -213,32 +209,48 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;</p>
-<p>MacOS: Sonoma 14.3（23D56）				<br>Xcode: Version 15.4 (15F31d)</p>
-<h1 id="✅-Hexo"><a href="#✅-Hexo" class="headerlink" title=" ✅ Hexo
- "></a> ✅ Hexo
- </h1><p>目前MAC電腦晶片有兩種：  </p>
-<img src="/2024/12/16/APP%E9%96%8B%E7%99%BC%E6%99%82%E6%94%AF%E6%8F%B4%E9%9B%99%E6%9E%B6%E6%A7%8B%E8%A6%81%E4%BF%AE%E6%94%B9%E7%9A%84%E5%9C%B0%E6%96%B9/Oli-20241118-143744.jpg" class title="Oli-20241118-143744">  
+        <p>所有上傳到App Store的App都會透過Xcode做簽名與公證，所以開發者無需另外處理。<br>如果不要透過App Store分發App則需要做簽名與公證，否則使用者都無法安裝APP。</p>
+<h1 id="簽名"><a href="#簽名" class="headerlink" title="簽名"></a>簽名</h1><p>一般來說，一個專案簽一次就好，但是如果專案裡面有其他的執行檔，如.sh，.app等等，這些執行檔就要做額外做簽名。</p>
+<p>如果專案裡面，有三個.sh，就必須將三個.sh額外做簽名，匯出.app之後要再做一次，爾後，如果有修改過內容，也要重新簽名。</p>
+<p>目前來說，簽名都要用同一個帳號做簽章。</p>
+<h4 id="指令範例："><a href="#指令範例：" class="headerlink" title="指令範例："></a>指令範例：</h4><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">codesign <span class="token parameter variable">--keychain</span> <span class="token string">"/Library/Keychains/keychain"</span> <span class="token parameter variable">--sign</span> <span class="token string">"Developer ID Application: RRRR TECH CO., LTD (YYJJNNNBYG)"</span> <span class="token parameter variable">--timestamp</span> <span class="token parameter variable">--options</span> runtime <span class="token parameter variable">--verbose</span><span class="token operator">=</span><span class="token number">4</span> /Users/Shared/App<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>說明：</p>
+<h4 id="–keychain-“-x2F-Library-x2F-Keychains-x2F-keychain”"><a href="#–keychain-“-x2F-Library-x2F-Keychains-x2F-keychain”" class="headerlink" title="–keychain “&#x2F;Library&#x2F;Keychains&#x2F;keychain”"></a>–keychain “&#x2F;Library&#x2F;Keychains&#x2F;keychain”</h4><ul>
+<li>   指定使用的鑰匙串 (Keychain) 來查找簽名所需的憑證。</li>
+<li>   在這裡，使用的是系統鑰匙串 &#x2F;Library&#x2F;Keychains&#x2F;System.keychain，這樣可以確保所需的憑證從系統範圍的 Keychain 中找到。</li>
+</ul>
+<h4 id="–sign-“Developer-ID-Application-RRRR-TECH-CO-LTD-YYJJNNNBYG-”"><a href="#–sign-“Developer-ID-Application-RRRR-TECH-CO-LTD-YYJJNNNBYG-”" class="headerlink" title="–sign “Developer ID Application: RRRR TECH CO., LTD (YYJJNNNBYG)”"></a>–sign “Developer ID Application: RRRR TECH CO., LTD (YYJJNNNBYG)”</h4><ul>
+<li>   用於指定簽名憑證。</li>
+<li>   這裡使用的是「Developer ID Application」的憑證，這類憑證允許將應用分發給 macOS 使用者，並避免 Gatekeeper 進行警告。</li>
+<li>   RRRR TECH CO., LTD (YYJJNNNBYG) 是這個憑證的名稱和團隊 ID，可以確保簽名是由授權的開發者完成的。</li>
+</ul>
+<h4 id="–timestamp"><a href="#–timestamp" class="headerlink" title="–timestamp"></a>–timestamp</h4><ul>
+<li>   此參數會將時間戳記加到簽名中，以確保簽名的持久有效性。</li>
+<li>   即使憑證過期，有時間戳記的簽名依然會被視為有效，適合長期分發的應用。</li>
+</ul>
+<h4 id="–options-runtime"><a href="#–options-runtime" class="headerlink" title="–options runtime"></a>–options runtime</h4><ul>
+<li>   開啟 Apple 的「執行時安全性」功能，這包括系統完整性保護 (SIP) 和代碼完整性檢查。</li>
+<li>   這樣可以增加應用的安全性，防止被修改或植入惡意程式碼。這個選項在 macOS Mojave 及之後的版本是必要的。</li>
+</ul>
+<h4 id="–verbose-x3D-4"><a href="#–verbose-x3D-4" class="headerlink" title="–verbose&#x3D;4"></a>–verbose&#x3D;4</h4><ul>
+<li>   設置詳情輸出等級，數字 4 代表最高的詳細級別，會提供更多的輸出訊息，幫助在簽名過程中進行故障排查。</li>
+</ul>
+<h4 id="x2F-Users-x2F-Shared-x2F-App"><a href="#x2F-Users-x2F-Shared-x2F-App" class="headerlink" title="&#x2F;Users&#x2F;Shared&#x2F;App"></a>&#x2F;Users&#x2F;Shared&#x2F;App</h4><ul>
+<li>   這是需要進行簽名的目標檔案或應用的路徑。</li>
+<li>   此目錄下的 App 是進行簽名的主體，命令會遞歸地對該應用及其所有包含的可執行檔案進行簽名。</li>
+</ul>
+<h1 id="查看簽名內容"><a href="#查看簽名內容" class="headerlink" title="查看簽名內容"></a>查看簽名內容</h1><p>在公證的時候，如果常常無法成功，就查看簽名的內容，看簽名跟公證用的帳號是不是同一個。</p>
+<p>下圖為簽名內容  </p>
+<img src="/2025/01/07/macOS-APP-%E7%B0%BD%E5%90%8D/Oli-20241119-153823.jpg" class title="Oli-20241119-153823">
 
-<p>目前已經出到M4了，但是仍然有intel在使用，所以在開發MacOS APP時還是要支持雙架構。</p>
-<p>如果不支援，icon的圖示會如下：</p>
-<p>（如果系統版本過低，也會出現這個圖示。）</p>
-<img src="/2024/12/16/APP%E9%96%8B%E7%99%BC%E6%99%82%E6%94%AF%E6%8F%B4%E9%9B%99%E6%9E%B6%E6%A7%8B%E8%A6%81%E4%BF%AE%E6%94%B9%E7%9A%84%E5%9C%B0%E6%96%B9/Oli-20241118-144800.jpg" class title="Oli-20241118-144800">
 
-<h1 id="支援雙架構要修改的地方只有一個"><a href="#支援雙架構要修改的地方只有一個" class="headerlink" title="支援雙架構要修改的地方只有一個"></a>支援雙架構要修改的地方只有一個</h1><img src="/2024/12/16/APP%E9%96%8B%E7%99%BC%E6%99%82%E6%94%AF%E6%8F%B4%E9%9B%99%E6%9E%B6%E6%A7%8B%E8%A6%81%E4%BF%AE%E6%94%B9%E7%9A%84%E5%9C%B0%E6%96%B9/Oli-20241118-145454.jpg" class title="Oli-20241118-145454">
+<h4 id="指令範例：-1"><a href="#指令範例：-1" class="headerlink" title="指令範例："></a>指令範例：</h4><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">codesign <span class="token parameter variable">-dvvv</span> /path/to/xxx.app<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<ol>
-<li>選擇 TARGETS  </li>
-<li>選擇 Build Settings   </li>
-<li>輸入 Architectures  </li>
-<li>找到 Architectures  </li>
-<li>點擊 選other…</li>
-</ol>
-<img src="/2024/12/16/APP%E9%96%8B%E7%99%BC%E6%99%82%E6%94%AF%E6%8F%B4%E9%9B%99%E6%9E%B6%E6%A7%8B%E8%A6%81%E4%BF%AE%E6%94%B9%E7%9A%84%E5%9C%B0%E6%96%B9/Oli-20241118-145811.jpg" class title="Oli-20241118-145811">
+<p>路徑要寫絕對路徑。</p>
+<h1 id="重新簽名"><a href="#重新簽名" class="headerlink" title="重新簽名"></a>重新簽名</h1><p>如果發現簽名的ID是錯的，就要重新簽。</p>
+<h4 id="指令範例：-2"><a href="#指令範例：-2" class="headerlink" title="指令範例："></a>指令範例：</h4><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">codesign <span class="token parameter variable">--force</span> <span class="token parameter variable">--deep</span> <span class="token parameter variable">--keychain</span> <span class="token string">"/Library/Keychains/System.keychain"</span> <span class="token parameter variable">--sign</span> <span class="token string">"Developer ID Application: AAAA INC. (5Q55QYY5AA)"</span> <span class="token parameter variable">--timestamp</span> <span class="token parameter variable">--options</span> runtime <span class="token parameter variable">--verbose</span><span class="token operator">=</span><span class="token number">4</span> /Users/onAndDecryption1/App<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<p>如果有需要新增的架構就按左下的「＋」</p>
-<img src="/2024/12/16/APP%E9%96%8B%E7%99%BC%E6%99%82%E6%94%AF%E6%8F%B4%E9%9B%99%E6%9E%B6%E6%A7%8B%E8%A6%81%E4%BF%AE%E6%94%B9%E7%9A%84%E5%9C%B0%E6%96%B9/Oli-20241118-145920.jpg" class title="Oli-20241118-145920">
-
+<p>如果接著要做分發就要操作公證<br>關於公證的文章就可以參考另一篇文章：<a target="_blank" rel="noopener" href="https://oli179.github.io/2025/01/07/macOS-APP-%E5%85%AC%E8%AD%89-Notarization/">macOS APP 公證(Notarization)</a></p>
 
     </div>
 
@@ -248,7 +260,7 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/Xcode/" rel="tag"># Xcode</a>
+              <a href="/tags/%E7%B0%BD%E5%90%8D/" rel="tag"># 簽名</a>
           </div>
 
         
@@ -257,13 +269,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2024/12/16/%E7%94%A8%E6%8C%87%E4%BB%A4-%E8%85%B3%E6%9C%AC-%E5%A3%93%E7%B8%AE%E6%AA%94%E6%A1%88-for-Mac/" rel="prev" title="用指令(腳本)壓縮檔案 for Mac">
-      <i class="fa fa-chevron-left"></i> 用指令(腳本)壓縮檔案 for Mac
+    <a href="/2025/01/07/macOS-APP-%E5%85%AC%E8%AD%89-Notarization/" rel="prev" title="macOS APP 公證-Notarization">
+      <i class="fa fa-chevron-left"></i> macOS APP 公證-Notarization
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2024/12/17/Wallet%E9%96%8B%E7%99%BC-Wallet%E5%9C%96%E7%89%87%E9%99%90%E5%88%B6/" rel="next" title="Wallet開發-Wallet圖片限制">
-      Wallet開發-Wallet圖片限制 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -322,8 +331,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E2%9C%85-Hexo"><span class="nav-number">1.</span> <span class="nav-text"> ✅ Hexo
- </span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%94%AF%E6%8F%B4%E9%9B%99%E6%9E%B6%E6%A7%8B%E8%A6%81%E4%BF%AE%E6%94%B9%E7%9A%84%E5%9C%B0%E6%96%B9%E5%8F%AA%E6%9C%89%E4%B8%80%E5%80%8B"><span class="nav-number">2.</span> <span class="nav-text">支援雙架構要修改的地方只有一個</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%B0%BD%E5%90%8D"><span class="nav-number">1.</span> <span class="nav-text">簽名</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8C%87%E4%BB%A4%E7%AF%84%E4%BE%8B%EF%BC%9A"><span class="nav-number">1.0.0.1.</span> <span class="nav-text">指令範例：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E2%80%93keychain-%E2%80%9C-x2F-Library-x2F-Keychains-x2F-keychain%E2%80%9D"><span class="nav-number">1.0.0.2.</span> <span class="nav-text">–keychain “&#x2F;Library&#x2F;Keychains&#x2F;keychain”</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E2%80%93sign-%E2%80%9CDeveloper-ID-Application-RRRR-TECH-CO-LTD-YYJJNNNBYG-%E2%80%9D"><span class="nav-number">1.0.0.3.</span> <span class="nav-text">–sign “Developer ID Application: RRRR TECH CO., LTD (YYJJNNNBYG)”</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E2%80%93timestamp"><span class="nav-number">1.0.0.4.</span> <span class="nav-text">–timestamp</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E2%80%93options-runtime"><span class="nav-number">1.0.0.5.</span> <span class="nav-text">–options runtime</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E2%80%93verbose-x3D-4"><span class="nav-number">1.0.0.6.</span> <span class="nav-text">–verbose&#x3D;4</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#x2F-Users-x2F-Shared-x2F-App"><span class="nav-number">1.0.0.7.</span> <span class="nav-text">&#x2F;Users&#x2F;Shared&#x2F;App</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E7%B0%BD%E5%90%8D%E5%85%A7%E5%AE%B9"><span class="nav-number">2.</span> <span class="nav-text">查看簽名內容</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8C%87%E4%BB%A4%E7%AF%84%E4%BE%8B%EF%BC%9A-1"><span class="nav-number">2.0.0.1.</span> <span class="nav-text">指令範例：</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%87%8D%E6%96%B0%E7%B0%BD%E5%90%8D"><span class="nav-number">3.</span> <span class="nav-text">重新簽名</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8C%87%E4%BB%A4%E7%AF%84%E4%BE%8B%EF%BC%9A-2"><span class="nav-number">3.0.0.1.</span> <span class="nav-text">指令範例：</span></a></li></ol></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
