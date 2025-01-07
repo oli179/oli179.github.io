@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-16x16-next.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-32x32-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"huang0429.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta property="og:type" content="article">
+<meta property="og:title" content="macOS APP 公證-Notarization">
+<meta property="og:url" content="https://huang0429.github.io/2025/01/07/macOS-APP-%E5%85%AC%E8%AD%89-Notarization/index.html">
+<meta property="og:site_name" content="天下第一不是我">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://huang0429.github.io/2025/01/07/macOS-APP-%E5%85%AC%E8%AD%89-Notarization/Oli-20241119-161134.jpg">
+<meta property="og:image" content="https://huang0429.github.io/2025/01/07/macOS-APP-%E5%85%AC%E8%AD%89-Notarization/Oli-20241119-162951.jpg">
+<meta property="og:image" content="https://huang0429.github.io/2025/01/07/macOS-APP-%E5%85%AC%E8%AD%89-Notarization/Oli-20250102-114931.jpg">
+<meta property="og:image" content="https://huang0429.github.io/2025/01/07/macOS-APP-%E5%85%AC%E8%AD%89-Notarization/Oli-20250102-115311.jpg">
+<meta property="article:published_time" content="2025-01-07T07:55:16.000Z">
+<meta property="article:modified_time" content="2025-01-07T07:55:16.000Z">
+<meta property="article:author" content="Oli">
+<meta property="article:tag" content="公證">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://huang0429.github.io/2025/01/07/macOS-APP-%E5%85%AC%E8%AD%89-Notarization/Oli-20241119-161134.jpg">
+
+<link rel="canonical" href="https://huang0429.github.io/2025/01/07/macOS-APP-%E5%85%AC%E8%AD%89-Notarization/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-TW'
+  };
+</script>
+
+  <title>macOS APP 公證-Notarization | 天下第一不是我</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">天下第一不是我</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">我學的很快樂</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤<span class="badge">14</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類<span class="badge">12</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔<span class="badge">15</span></a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://huang0429.github.io/2025/01/07/macOS-APP-%E5%85%AC%E8%AD%89-Notarization/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/../images/avatar.png">
+      <meta itemprop="name" content="Oli">
+      <meta itemprop="description" content="不要把我看的太重，因為我贏不了你">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="天下第一不是我">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          macOS APP 公證-Notarization
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">發表於</span>
+
+              <time title="創建時間：2025-01-07 15:55:16" itemprop="dateCreated datePublished" datetime="2025-01-07T15:55:16+08:00">2025-01-07</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分類於</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/AppleDeveloper/" itemprop="url" rel="index"><span itemprop="name">AppleDeveloper</span></a>
+                </span>
+            </span>
+
+          
+            <div class="post-description"> </div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>🌱環境：<br>MacOS: Sonoma 14.3（23D56）<br>Xcode: Version 15.4 (15F31d)  </p>
+<p>如果沒有要透過App store分發App的話，就要做公證，避免被視為惡意軟體。<br>之前透過雲端給客戶試用的.dmg現在已經無法安裝了，MacOS也不給下載了。  </p>
+<p>在安裝沒有公證的APP常見的訊息如下：</p>
+<img src="/2025/01/07/macOS-APP-%E5%85%AC%E8%AD%89-Notarization/Oli-20241119-161134.jpg" class title="Oli-20241119-161134">
+
+
+<h1 id="公證的基本介紹"><a href="#公證的基本介紹" class="headerlink" title="公證的基本介紹"></a>公證的基本介紹</h1><p><strong>什麼是公證 (Notarization)：</strong></p>
+<ul>
+<li>公證是 Apple 提供的安全檢查服務，用於驗證應用是否安全且未被惡意修改。</li>
+<li>從 macOS Catalina (10.15) 開始，公證已成為非 App Store 分發應用的必要步驟。</li>
+</ul>
+<p><strong>為什麼需要公證：</strong></p>
+<ul>
+<li>確保應用可以正常通過 Gatekeeper。</li>
+<li>增強用戶對應用的信任度，避免被標記為「無法驗證的開發者」。</li>
+</ul>
+<h1 id="公證的流程"><a href="#公證的流程" class="headerlink" title="公證的流程"></a>公證的流程</h1><p><strong>準備開發者帳號：</strong></p>
+<ul>
+<li>有效的 Developer ID（付費會員）。</li>
+</ul>
+<p><strong>對APP進行簽名：</strong></p>
+<ul>
+<li>使用 codesign 為APP及其”所有執行檔”進行簽名。</li>
+</ul>
+<p><strong>提交公證請求：</strong></p>
+<ul>
+<li>使用 xcrun notarytool 將簽名後的應用提交到 Apple 的公證服務。</li>
+</ul>
+<p><strong>檢查公證結果</strong></p>
+<ul>
+<li>大部份幾分鐘就有結果了</li>
+<li>但是我也有遇過隔天才有結果</li>
+</ul>
+<p>在安裝APP時，螢幕的右上方會出現一個訊息：</p>
+<img src="/2025/01/07/macOS-APP-%E5%85%AC%E8%AD%89-Notarization/Oli-20241119-162951.jpg" class title="Oli-20241119-162951">
+
+<p>被碼掉的部份是使用者的帳號，如果你希望出現的文字是”公司”名稱的話，要做兩件事：</p>
+<ul>
+<li>開發者帳號申請 “公司帳號” &#x3D;&#x3D;&gt; 提供鄧白氏編號。</li>
+<li>申請 “鄧白氏”。</li>
+</ul>
+<p><em>鄧白氏申請時間要多長？</em><br><strong>官方說法是三十天，我老闆申請二星期下來，我客戶申請近三個月才下來，所以不曉得發生了什麼事。</strong></p>
+<h1 id="公證的注意事項"><a href="#公證的注意事項" class="headerlink" title="公證的注意事項"></a>公證的注意事項</h1><p><strong>支援的檔案格式：</strong><br>.app：獨立應用程序。<br>.dmg：安裝映像文件。<br>.pkg：安裝包。<br>.zip：壓縮應用。</p>
+<p><strong>需要簽名的檔案：</strong></p>
+<ul>
+<li>主應用程序及其包含的所有二進制檔案（如 .sh、.dylib、內嵌的 .app 等）。</li>
+<li><strong>含有未簽名的檔案會導致公證失敗（很重要）。</strong></li>
+</ul>
+<p><strong>有效的憑證：</strong></p>
+<ul>
+<li>確保使用的 Developer ID 憑證有效且未過期。</li>
+<li><strong>必須使用 “相同” 的帳號進行簽名和公證（這個很重要）</strong>。</li>
+</ul>
+<p><strong>App Store 與非 App Store 的區別：</strong></p>
+<ul>
+<li>App Store 分發應用會自動進行公證，開發者無需額外操作。</li>
+<li>非 App Store 分發需要手動完成公證（就是現在要做的）。</li>
+</ul>
+<p>官方文件：<a target="_blank" rel="noopener" href="https://developer.apple.com/documentation/security/notarizing-macos-software-before-distribution">Apple官方公證指南</a></p>
+<h1 id="公證實際操作"><a href="#公證實際操作" class="headerlink" title="公證實際操作"></a>公證實際操作</h1><h2 id="notarize-profile設置"><a href="#notarize-profile設置" class="headerlink" title="notarize-profile設置"></a>notarize-profile設置</h2><p>notarize-profile 主要用來簡化公證工具的配置過程。<br>請參考<a target="_blank" rel="noopener" href="https://developer.apple.com/documentation/technotes/tn3147-migrating-to-the-latest-notarization-tool">Apple官網</a><br><a target="_blank" rel="noopener" href="https://developer.apple.com/documentation/technotes/tn3147-migrating-to-the-latest-notarization-tool">https://developer.apple.com/documentation/technotes/tn3147-migrating-to-the-latest-notarization-tool</a></p>
+<h3 id="notarize-profile-的作用"><a href="#notarize-profile-的作用" class="headerlink" title="notarize-profile 的作用"></a>notarize-profile 的作用</h3><p>簡化公證流程，減少重複輸入的參數。<br>自動填充公證請求中必要的資訊：</p>
+<ul>
+<li>Apple ID</li>
+<li>App-specific password</li>
+</ul>
+<p>使用 notarize-profile 可以避免每次執行公證指令時重複提供這些細節。</p>
+<h3 id="上傳公證（事後查詢公證狀態）"><a href="#上傳公證（事後查詢公證狀態）" class="headerlink" title="上傳公證（事後查詢公證狀態）"></a>上傳公證（事後查詢公證狀態）</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">xcrun notarytool submit /path/to/xxx.dmg --keychain-profile notarize-profile
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<img src="/2025/01/07/macOS-APP-%E5%85%AC%E8%AD%89-Notarization/Oli-20250102-114931.jpg" class title="Oli-20250102-114931">
+
+
+<h3 id="上傳公證（現場等）"><a href="#上傳公證（現場等）" class="headerlink" title="上傳公證（現場等）"></a>上傳公證（現場等）</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">xcrun notarytool submit /path/to/xxx.dmg --keychain-profile notarize-profile <span class="token parameter variable">--wait</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>這個寫法會直接返回結果，不會立即退出。</p>
+<h3 id="查詢公證結果"><a href="#查詢公證結果" class="headerlink" title="查詢公證結果"></a>查詢公證結果</h3><img src="/2025/01/07/macOS-APP-%E5%85%AC%E8%AD%89-Notarization/Oli-20250102-115311.jpg" class title="Oli-20250102-115311">
+
+<h3 id="取消公證"><a href="#取消公證" class="headerlink" title="取消公證"></a>取消公證</h3><p>取消公證請求的操作僅適用於已提交但尚未完成的公證。</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">xcrun altool --notarization-info <span class="token string">"REQUEST-UUID"</span> <span class="token punctuation">\</span>
+  <span class="token parameter variable">--username</span> <span class="token string">"your-apple-id@example.com"</span> <span class="token punctuation">\</span>
+  <span class="token parameter variable">--password</span> <span class="token string">"app-specific-password"</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+
+<h2 id="下載公證票據並附加到文件中"><a href="#下載公證票據並附加到文件中" class="headerlink" title="下載公證票據並附加到文件中"></a>下載公證票據並附加到文件中</h2><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">xcrun stapler staple /path/to/file<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h2 id="驗證票據是否附加成功"><a href="#驗證票據是否附加成功" class="headerlink" title="驗證票據是否附加成功"></a>驗證票據是否附加成功</h2><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">xcrun stapler validate /path/to/file<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><strong>如果完成了 .dmg 或應用的 公證（notarization），但 未附加票據（staple），可能會出現以下問題：</strong>  </p>
+<h3 id="用戶在離線環境中無法驗證應用"><a href="#用戶在離線環境中無法驗證應用" class="headerlink" title="用戶在離線環境中無法驗證應用"></a>用戶在離線環境中無法驗證應用</h3><ul>
+<li>未附加票據：<br>當用戶嘗試打開應用或安裝 .dmg 時，macOS 需要連接到 Apple 的公證服務來驗證應用的合法性。如果用戶處於 離線環境，系統將無法驗證，可能會顯示安全警告，例如：”應用程式無法打開，因為無法驗證其來源。”</li>
+<li>附加票據後：<br>公證票據會被嵌入到應用或 .dmg 文件中，用戶在 離線 時仍然可以正常打開或安裝，因為系統可以直接從文件中讀取票據。</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%85%AC%E8%AD%89/" rel="tag"># 公證</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2024/12/17/Wallet%E9%8C%A2%E5%8C%85%E6%B8%AC%E8%A9%A6-%E4%B8%80%E9%8D%B5%E5%8A%A0%E5%85%A5%E9%8C%A2%E5%8C%85/" rel="prev" title="Wallet錢包測試-一鍵加入錢包">
+      <i class="fa fa-chevron-left"></i> Wallet錢包測試-一鍵加入錢包
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%AC%E8%AD%89%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BB%8B%E7%B4%B9"><span class="nav-number">1.</span> <span class="nav-text">公證的基本介紹</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%AC%E8%AD%89%E7%9A%84%E6%B5%81%E7%A8%8B"><span class="nav-number">2.</span> <span class="nav-text">公證的流程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%AC%E8%AD%89%E7%9A%84%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A0%85"><span class="nav-number">3.</span> <span class="nav-text">公證的注意事項</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%AC%E8%AD%89%E5%AF%A6%E9%9A%9B%E6%93%8D%E4%BD%9C"><span class="nav-number">4.</span> <span class="nav-text">公證實際操作</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#notarize-profile%E8%A8%AD%E7%BD%AE"><span class="nav-number">4.1.</span> <span class="nav-text">notarize-profile設置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#notarize-profile-%E7%9A%84%E4%BD%9C%E7%94%A8"><span class="nav-number">4.1.1.</span> <span class="nav-text">notarize-profile 的作用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8A%E5%82%B3%E5%85%AC%E8%AD%89%EF%BC%88%E4%BA%8B%E5%BE%8C%E6%9F%A5%E8%A9%A2%E5%85%AC%E8%AD%89%E7%8B%80%E6%85%8B%EF%BC%89"><span class="nav-number">4.1.2.</span> <span class="nav-text">上傳公證（事後查詢公證狀態）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8A%E5%82%B3%E5%85%AC%E8%AD%89%EF%BC%88%E7%8F%BE%E5%A0%B4%E7%AD%89%EF%BC%89"><span class="nav-number">4.1.3.</span> <span class="nav-text">上傳公證（現場等）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E8%A9%A2%E5%85%AC%E8%AD%89%E7%B5%90%E6%9E%9C"><span class="nav-number">4.1.4.</span> <span class="nav-text">查詢公證結果</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%96%E6%B6%88%E5%85%AC%E8%AD%89"><span class="nav-number">4.1.5.</span> <span class="nav-text">取消公證</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8B%E8%BC%89%E5%85%AC%E8%AD%89%E7%A5%A8%E6%93%9A%E4%B8%A6%E9%99%84%E5%8A%A0%E5%88%B0%E6%96%87%E4%BB%B6%E4%B8%AD"><span class="nav-number">4.2.</span> <span class="nav-text">下載公證票據並附加到文件中</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A9%97%E8%AD%89%E7%A5%A8%E6%93%9A%E6%98%AF%E5%90%A6%E9%99%84%E5%8A%A0%E6%88%90%E5%8A%9F"><span class="nav-number">4.3.</span> <span class="nav-text">驗證票據是否附加成功</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%A8%E6%88%B6%E5%9C%A8%E9%9B%A2%E7%B7%9A%E7%92%B0%E5%A2%83%E4%B8%AD%E7%84%A1%E6%B3%95%E9%A9%97%E8%AD%89%E6%87%89%E7%94%A8"><span class="nav-number">4.3.1.</span> <span class="nav-text">用戶在離線環境中無法驗證應用</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Oli"
+      src="/../images/avatar.png">
+  <p class="site-author-name" itemprop="name">Oli</p>
+  <div class="site-description" itemprop="description">不要把我看的太重，因為我贏不了你</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">15</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/oli179" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;oli179" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:huang7179@gmail.com" title="E-Mail → mailto:huang7179@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/yourname" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;yourname" rel="noopener" target="_blank"><i class="fab fa-facebook fa-fw"></i>FB Page</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Oli</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 強力驅動
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
